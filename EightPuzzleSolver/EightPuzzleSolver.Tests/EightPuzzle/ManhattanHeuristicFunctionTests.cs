@@ -36,12 +36,12 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
         }
 
         [Theory]
-        [MemberData(nameof(TestData))]
-        public void ManhattanHeuristicFunctionTest(Board board, int expectedResult)
+        [MemberData( nameof( TestData ) )]
+        public void ManhattanHeuristicFunctionTest( Board board, int expectedResult )
         {
-            var h = new ManhattanHeuristicFunction(Board.CreateGoalBoard(board.RowCount, board.ColumnCount));
+            var h = new ManhattanHeuristicFunction( Board.CreateGoalBoard( board.RowCount, board.ColumnCount ) );
 
-            Assert.Equal(expectedResult, h.Calculate(new EightPuzzleState(board)));
+            Assert.Equal( expectedResult, h.Calculate( new EightPuzzleState( board ) ) );
         }
     }
 }

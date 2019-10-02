@@ -46,10 +46,10 @@ namespace EightPuzzleSolver.Search.Algorithms
 
                 foreach ( Node<TProblemState> kChildNode in kNode.ExpandNode() )
                 {
-                    kQueue.Enqueue(kChildNode);
+                    kQueue.Enqueue( kChildNode );
                 }
             }
-            
+
             return EmptyResult();
         }
 

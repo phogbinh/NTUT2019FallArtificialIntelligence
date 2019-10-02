@@ -14,47 +14,47 @@ namespace EightPuzzleSolver.Tests.Search
 
         public IterativeDeepeningSearchTests()
         {
-            foreach (var name in new[] { "A", "B", "C", "D", "E", "F" })
+            foreach ( var name in new[] { "A", "B", "C", "D", "E", "F" } )
             {
-                _states[name] = new DummyProblemState(0, name);
+                _states[ name ] = new DummyProblemState( 0, name );
             }
             _goalState = DummyProblemState.CreateGoalState();
-            _states[_goalState.Name] = _goalState;
+            _states[ _goalState.Name ] = _goalState;
         }
 
         [Fact]
         public void ShouldFindGoal()
         {
-            _states["A"].NextStatesList = new[] { _states["B"], _states["C"] };
-            _states["B"].NextStatesList = new[] { _states["D"] };
-            _states["C"].NextStatesList = new[] { _states["E"] };
-            _states["E"].NextStatesList = new[] { _states["F"] };
-            _states["F"].NextStatesList = new[] { _goalState };
+            _states[ "A" ].NextStatesList = new[] { _states[ "B" ], _states[ "C" ] };
+            _states[ "B" ].NextStatesList = new[] { _states[ "D" ] };
+            _states[ "C" ].NextStatesList = new[] { _states[ "E" ] };
+            _states[ "E" ].NextStatesList = new[] { _states[ "F" ] };
+            _states[ "F" ].NextStatesList = new[] { _goalState };
 
-            var problem = new DummyProblem(_states["A"]);
+            var problem = new DummyProblem( _states[ "A" ] );
 
             var search = new IterativeDeepeningSearch<DummyProblemState>();
 
-            var result = search.Search(problem).ToList();
+            var result = search.Search( problem ).ToList();
 
-            Assert.Equal(new[] { _states["A"], _states["C"], _states["E"], _states["F"], _goalState }, result);
+            Assert.Equal( new[] { _states[ "A" ], _states[ "C" ], _states[ "E" ], _states[ "F" ], _goalState }, result );
         }
 
         [Fact]
         public void ShouldFail()
         {
-            _states["A"].NextStatesList = new[] { _states["B"], _states["C"] };
-            _states["B"].NextStatesList = new[] { _states["D"] };
-            _states["C"].NextStatesList = new[] { _states["E"] };
-            _states["E"].NextStatesList = new[] { _states["F"] };
+            _states[ "A" ].NextStatesList = new[] { _states[ "B" ], _states[ "C" ] };
+            _states[ "B" ].NextStatesList = new[] { _states[ "D" ] };
+            _states[ "C" ].NextStatesList = new[] { _states[ "E" ] };
+            _states[ "E" ].NextStatesList = new[] { _states[ "F" ] };
 
-            var problem = new DummyProblem(_states["A"]);
+            var problem = new DummyProblem( _states[ "A" ] );
 
             var search = new IterativeDeepeningSearch<DummyProblemState>();
 
-            var result = search.Search(problem).ToList();
+            var result = search.Search( problem ).ToList();
 
-            Assert.Empty(result);
+            Assert.Empty( result );
         }
     }
 }

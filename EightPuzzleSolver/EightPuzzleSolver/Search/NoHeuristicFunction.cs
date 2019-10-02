@@ -3,7 +3,7 @@
     public class NoHeuristicFunction<TProblemState> : IHeuristicFunction<TProblemState>
                                     where TProblemState : IProblemState<TProblemState>
     {
-        public double Calculate(TProblemState state)
+        public double Calculate( TProblemState state )
         {
             return 0;
         }

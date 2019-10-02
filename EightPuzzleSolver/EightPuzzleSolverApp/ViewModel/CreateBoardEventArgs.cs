@@ -7,10 +7,10 @@ namespace EightPuzzleSolverApp.ViewModel
     {
         public CreateBoardEventArgs()
         {
-            
+
         }
 
-        public CreateBoardEventArgs(Board board)
+        public CreateBoardEventArgs( Board board )
         {
             Board = board;
         }

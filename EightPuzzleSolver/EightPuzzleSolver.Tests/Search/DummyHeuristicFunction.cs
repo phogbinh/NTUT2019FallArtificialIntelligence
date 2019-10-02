@@ -8,7 +8,7 @@ namespace EightPuzzleSolver.Tests.Search
     {
         private readonly Dictionary<string, int> _dict;
 
-        public DummyHeuristicFunction(Dictionary<string, int> dict)
+        public DummyHeuristicFunction( Dictionary<string, int> dict )
         {
             _dict = dict;
         }
@@ -18,10 +18,10 @@ namespace EightPuzzleSolver.Tests.Search
             _dict = new Dictionary<string, int>();
         }
 
-        public double Calculate(DummyProblemState state)
+        public double Calculate( DummyProblemState state )
         {
-            if (_dict.Any())
-                return _dict[state.Name];
+            if ( _dict.Any() )
+                return _dict[ state.Name ];
             return 0;
         }
     }

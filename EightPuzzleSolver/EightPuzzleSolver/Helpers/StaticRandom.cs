@@ -8,16 +8,16 @@ namespace EightPuzzleSolver.Helpers
         private static int _seed = Environment.TickCount;
 
         private static readonly ThreadLocal<Random> Random =
-            new ThreadLocal<Random>(() => new Random(Interlocked.Increment(ref _seed)));
+            new ThreadLocal<Random>( () => new Random( Interlocked.Increment( ref _seed ) ) );
 
         public static int Next()
         {
             return Random.Value.Next();
         }
 
-        public static int Next(int min, int max)
+        public static int Next( int min, int max )
         {
-            return Random.Value.Next(min, max);
+            return Random.Value.Next( min, max );
         }
     }
 }

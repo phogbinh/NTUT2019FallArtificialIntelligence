@@ -7,10 +7,10 @@
 			 xmlns:ignore="http://www.galasoft.ch/ignore"
              StartupUri="View/MainWindow.xaml"
              mc:Ignorable="d ignore">
-    
+
     <Application.Resources>
         <vm:ViewModelLocator x:Key="Locator"
                              d:IsDataSource="True" />
     </Application.Resources>
-    
+
 </Application>

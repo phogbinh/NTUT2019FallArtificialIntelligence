@@ -11,18 +11,18 @@ namespace EightPuzzleSolver.Search.Algorithms
 
         private readonly IHeuristicFunction<TProblemState> _heuristicFunction;
 
-        public RecursiveBestFirstSearch(IHeuristicFunction<TProblemState> heuristicFunction)
+        public RecursiveBestFirstSearch( IHeuristicFunction<TProblemState> heuristicFunction )
         {
             _heuristicFunction = heuristicFunction;
         }
 
-        public IEnumerable<TProblemState> Search(Problem<TProblemState> problem, CancellationToken cancellationToken = default(CancellationToken))
+        public IEnumerable<TProblemState> Search( Problem<TProblemState> problem, CancellationToken cancellationToken = default( CancellationToken ) )
         {
-            var root = new Node<TProblemState>(problem.InitialState);
+            var root = new Node<TProblemState>( problem.InitialState );
 
-            var sr = Rbfs(problem, root, EvaluationFunction(root), Infinity, cancellationToken);
+            var sr = Rbfs( problem, root, EvaluationFunction( root ), Infinity, cancellationToken );
 
-            if (sr.Outcome == SearchResult.SearchOutcome.Success)
+            if ( sr.Outcome == SearchResult.SearchOutcome.Success )
             {
                 return sr.Solution.PathFromRootStates();
             }
@@ -30,61 +30,61 @@ namespace EightPuzzleSolver.Search.Algorithms
             return EmptyResult();
         }
 
-        private SearchResult Rbfs(Problem<TProblemState> problem, Node<TProblemState> node, double nodeF, double fLimit, CancellationToken cancellationToken)
+        private SearchResult Rbfs( Problem<TProblemState> problem, Node<TProblemState> node, double nodeF, double fLimit, CancellationToken cancellationToken )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            if (problem.IsGoalState(node.State))
+            if ( problem.IsGoalState( node.State ) )
             {
-                return new SearchResult(node, fLimit);
+                return new SearchResult( node, fLimit );
             }
 
             var successors = node.ExpandNode();
 
-            if (successors.Count == 0)
+            if ( successors.Count == 0 )
             {
-                return new SearchResult(null, Infinity);
+                return new SearchResult( null, Infinity );
             }
 
-            var f = new double[successors.Count];
+            var f = new double[ successors.Count ];
 
-            for (int i = 0; i < successors.Count; i++)
+            for ( int i = 0; i < successors.Count; i++ )
             {
-                f[i] = Math.Max(EvaluationFunction(successors[i]), nodeF);
+                f[ i ] = Math.Max( EvaluationFunction( successors[ i ] ), nodeF );
             }
 
-            while (true)
+            while ( true )
             {
-                int bestIndex = GetBestFValueIndex(f);
+                int bestIndex = GetBestFValueIndex( f );
 
-                if (f[bestIndex] > fLimit)
+                if ( f[ bestIndex ] > fLimit )
                 {
-                    return new SearchResult(null, f[bestIndex]);
+                    return new SearchResult( null, f[ bestIndex ] );
                 }
 
-                int altIndex = GetNextBestFValueIndex(f, bestIndex);
+                int altIndex = GetNextBestFValueIndex( f, bestIndex );
 
-                var sr = Rbfs(problem, successors[bestIndex], f[bestIndex], Math.Min(fLimit, f[altIndex]), cancellationToken);
+                var sr = Rbfs( problem, successors[ bestIndex ], f[ bestIndex ], Math.Min( fLimit, f[ altIndex ] ), cancellationToken );
 
-                f[bestIndex] = sr.FCostLimit;
+                f[ bestIndex ] = sr.FCostLimit;
 
-                if (sr.Outcome == SearchResult.SearchOutcome.Success)
+                if ( sr.Outcome == SearchResult.SearchOutcome.Success )
                 {
                     return sr;
                 }
             }
         }
 
-        private static int GetBestFValueIndex(double[] f)
+        private static int GetBestFValueIndex( double[] f )
         {
             int lidx = 0;
             double lowestSoFar = Infinity;
 
-            for (int i = 0; i < f.Length; i++)
+            for ( int i = 0; i < f.Length; i++ )
             {
-                if (f[i] < lowestSoFar)
+                if ( f[ i ] < lowestSoFar )
                 {
-                    lowestSoFar = f[i];
+                    lowestSoFar = f[ i ];
                     lidx = i;
                 }
             }
@@ -92,17 +92,17 @@ namespace EightPuzzleSolver.Search.Algorithms
             return lidx;
         }
 
-        private static int GetNextBestFValueIndex(double[] f, int bestIndex)
+        private static int GetNextBestFValueIndex( double[] f, int bestIndex )
         {
             // array may only contain 1 item, therefore default to bestIndex
             int lidx = bestIndex;
             double lowestSoFar = Infinity;
 
-            for (int i = 0; i < f.Length; i++)
+            for ( int i = 0; i < f.Length; i++ )
             {
-                if (i != bestIndex && f[i] < lowestSoFar)
+                if ( i != bestIndex && f[ i ] < lowestSoFar )
                 {
-                    lowestSoFar = f[i];
+                    lowestSoFar = f[ i ];
                     lidx = i;
                 }
             }
@@ -110,14 +110,14 @@ namespace EightPuzzleSolver.Search.Algorithms
             return lidx;
         }
 
-        private double EvaluationFunction(Node<TProblemState> node)
+        private double EvaluationFunction( Node<TProblemState> node )
         {
-            return node.PathCost + _heuristicFunction.Calculate(node.State);
+            return node.PathCost + _heuristicFunction.Calculate( node.State );
         }
 
         private IEnumerable<TProblemState> EmptyResult()
         {
-            return new TProblemState[0];
+            return new TProblemState[ 0 ];
         }
 
         private struct SearchResult
@@ -127,7 +127,7 @@ namespace EightPuzzleSolver.Search.Algorithms
                 Fail, Success
             }
 
-            public SearchResult(Node<TProblemState> solution, double fCostLimit)
+            public SearchResult( Node<TProblemState> solution, double fCostLimit )
             {
                 Outcome = solution == null ? SearchOutcome.Fail : SearchOutcome.Success;
                 Solution = solution;

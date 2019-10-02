@@ -9,42 +9,42 @@ namespace EightPuzzleSolver.Search.Algorithms
     {
         private readonly IHeuristicFunction<TProblemState> _heuristicFunction;
 
-        public AStarSearch(IHeuristicFunction<TProblemState> heuristicFunction)
+        public AStarSearch( IHeuristicFunction<TProblemState> heuristicFunction )
         {
             _heuristicFunction = heuristicFunction;
         }
 
-        public IEnumerable<TProblemState> Search(Problem<TProblemState> problem, CancellationToken cancellationToken = default(CancellationToken))
+        public IEnumerable<TProblemState> Search( Problem<TProblemState> problem, CancellationToken cancellationToken = default( CancellationToken ) )
         {
             var frontier = new SimplePriorityQueue<Node<TProblemState>>();
 
             var explored = new HashSet<TProblemState>();
 
-            var root = new Node<TProblemState>(problem.InitialState);
+            var root = new Node<TProblemState>( problem.InitialState );
 
-            frontier.Enqueue(root, EvaluationFunction(root));
+            frontier.Enqueue( root, EvaluationFunction( root ) );
 
-            while (frontier.Count > 0)
+            while ( frontier.Count > 0 )
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var node = frontier.Dequeue();
-                explored.Add(node.State);
+                explored.Add( node.State );
 
-                if (problem.IsGoalState(node.State))
+                if ( problem.IsGoalState( node.State ) )
                 {
                     return node.PathFromRootStates();
                 }
 
-                foreach (var child in node.ExpandNode())
+                foreach ( var child in node.ExpandNode() )
                 {
-                    if (!explored.Contains(child.State))
+                    if ( !explored.Contains( child.State ) )
                     {
-                        frontier.Enqueue(child, EvaluationFunction(child));
+                        frontier.Enqueue( child, EvaluationFunction( child ) );
                     }
                 }
-                
-                while (frontier.Count > 0 && explored.Contains(frontier.First.State))
+
+                while ( frontier.Count > 0 && explored.Contains( frontier.First.State ) )
                 {
                     frontier.Dequeue();
                 }
@@ -53,14 +53,14 @@ namespace EightPuzzleSolver.Search.Algorithms
             return EmptyResult();
         }
 
-        private double EvaluationFunction(Node<TProblemState> node)
+        private double EvaluationFunction( Node<TProblemState> node )
         {
-            return node.PathCost + _heuristicFunction.Calculate(node.State);
+            return node.PathCost + _heuristicFunction.Calculate( node.State );
         }
 
         private IEnumerable<TProblemState> EmptyResult()
         {
-            return new TProblemState[0];
+            return new TProblemState[ 0 ];
         }
     }
 }

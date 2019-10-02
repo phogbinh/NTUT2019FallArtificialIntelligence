@@ -8,38 +8,38 @@ namespace EightPuzzleSolver.EightPuzzle
     {
         private readonly Dictionary<int, Position> _tileExpectedPosDict = new Dictionary<int, Position>();
 
-        public ManhattanHeuristicFunction(Board goalBoard)
+        public ManhattanHeuristicFunction( Board goalBoard )
         {
-            for (int row = 0; row < goalBoard.RowCount; row++)
+            for ( int row = 0; row < goalBoard.RowCount; row++ )
             {
-                for (int col = 0; col < goalBoard.ColumnCount; col++)
+                for ( int col = 0; col < goalBoard.ColumnCount; col++ )
                 {
-                    int val = goalBoard[row, col];
+                    int val = goalBoard[ row, col ];
 
-                    _tileExpectedPosDict[val] = new Position(row, col);
+                    _tileExpectedPosDict[ val ] = new Position( row, col );
                 }
             }
         }
 
-        public double Calculate(EightPuzzleState state)
+        public double Calculate( EightPuzzleState state )
         {
             int result = 0;
 
             int expected = 0;
 
-            for (int row = 0; row < state.Board.RowCount; row++)
+            for ( int row = 0; row < state.Board.RowCount; row++ )
             {
-                for (int col = 0; col < state.Board.ColumnCount; col++)
+                for ( int col = 0; col < state.Board.ColumnCount; col++ )
                 {
-                    int val = state.Board[row, col];
+                    int val = state.Board[ row, col ];
                     expected++;
 
-                    var expectedPos = _tileExpectedPosDict[val];
+                    var expectedPos = _tileExpectedPosDict[ val ];
 
-                    if (val != 0 && val != expected)
+                    if ( val != 0 && val != expected )
                     {
-                        result += Math.Abs(row - expectedPos.Row) +
-                            Math.Abs(col - expectedPos.Column);
+                        result += Math.Abs( row - expectedPos.Row ) +
+                            Math.Abs( col - expectedPos.Column );
                     }
                 }
             }

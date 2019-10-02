@@ -10,151 +10,151 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
         [Fact]
         public void EqualsTest()
         {
-            var board1 = CreateBoard(new byte[,]
+            var board1 = CreateBoard( new byte[,]
             {
                 { 0, 1, 2 },
                 { 5, 4, 3 }
-            });
+            } );
 
-            var board2 = CreateBoard(new byte[,]
+            var board2 = CreateBoard( new byte[,]
             {
                 { 0, 1, 2 },
                 { 5, 4, 3 }
-            });
+            } );
 
-            var board3 = CreateBoard(new byte[,]
+            var board3 = CreateBoard( new byte[,]
             {
                 { 0, 2, 1 },
                 { 5, 4, 3 }
-            });
+            } );
 
-            Assert.Equal(board1, board2);
-            Assert.Equal(board2, board1);
-            Assert.True(board1 == board2);
-            Assert.False(board1 != board2);
+            Assert.Equal( board1, board2 );
+            Assert.Equal( board2, board1 );
+            Assert.True( board1 == board2 );
+            Assert.False( board1 != board2 );
 
-            Assert.NotEqual(board1, board3);
-            Assert.NotEqual(board3, board1);
-            Assert.True(board3 != board1);
-            Assert.False(board3 == board1);
+            Assert.NotEqual( board1, board3 );
+            Assert.NotEqual( board3, board1 );
+            Assert.True( board3 != board1 );
+            Assert.False( board3 == board1 );
         }
 
         [Fact]
         public void BlankTilePositionTest()
         {
-            var board = CreateBoard(new byte[,]
+            var board = CreateBoard( new byte[,]
             {
                 { 5, 1, 2 },
                 { 4, 3, 0 }
-            });
+            } );
 
-            Assert.Equal(1, board.BlankTilePosition.Row);
-            Assert.Equal(2, board.BlankTilePosition.Column);
+            Assert.Equal( 1, board.BlankTilePosition.Row );
+            Assert.Equal( 2, board.BlankTilePosition.Column );
         }
 
         [Fact]
         public void MoveTest()
         {
-            var board = CreateBoard(new byte[,]
+            var board = CreateBoard( new byte[,]
             {
                 { 5, 1, 2 },
                 { 4, 3, 0 }
-            });
+            } );
 
-            Assert.True(board.CanMove(MoveDirection.Left));
-            Assert.False(board.CanMove(MoveDirection.Right));
-            Assert.True(board.CanMove(MoveDirection.Top));
-            Assert.False(board.CanMove(MoveDirection.Bottom));
+            Assert.True( board.CanMove( MoveDirection.Left ) );
+            Assert.False( board.CanMove( MoveDirection.Right ) );
+            Assert.True( board.CanMove( MoveDirection.Top ) );
+            Assert.False( board.CanMove( MoveDirection.Bottom ) );
 
-            Assert.Throws<ArgumentException>(() => board.Move(MoveDirection.Right));
+            Assert.Throws<ArgumentException>( () => board.Move( MoveDirection.Right ) );
 
-            var newBoard = board.Move(MoveDirection.Left);
+            var newBoard = board.Move( MoveDirection.Left );
 
-            Assert.Equal(CreateBoard(new byte[,]
+            Assert.Equal( CreateBoard( new byte[,]
             {
                 { 5, 1, 2 },
                 { 4, 0, 3 }
-            }), newBoard);
-            Assert.True(newBoard.CanMove(MoveDirection.Left));
-            Assert.True(newBoard.CanMove(MoveDirection.Right));
-            Assert.True(newBoard.CanMove(MoveDirection.Top));
-            Assert.False(newBoard.CanMove(MoveDirection.Bottom));
+            } ), newBoard );
+            Assert.True( newBoard.CanMove( MoveDirection.Left ) );
+            Assert.True( newBoard.CanMove( MoveDirection.Right ) );
+            Assert.True( newBoard.CanMove( MoveDirection.Top ) );
+            Assert.False( newBoard.CanMove( MoveDirection.Bottom ) );
 
-            newBoard = newBoard.Move(MoveDirection.Top);
+            newBoard = newBoard.Move( MoveDirection.Top );
 
-            Assert.Equal(CreateBoard(new byte[,]
+            Assert.Equal( CreateBoard( new byte[,]
             {
                 { 5, 0, 2 },
                 { 4, 1, 3 }
-            }), newBoard);
-            Assert.True(newBoard.CanMove(MoveDirection.Left));
-            Assert.True(newBoard.CanMove(MoveDirection.Right));
-            Assert.False(newBoard.CanMove(MoveDirection.Top));
-            Assert.True(newBoard.CanMove(MoveDirection.Bottom));
+            } ), newBoard );
+            Assert.True( newBoard.CanMove( MoveDirection.Left ) );
+            Assert.True( newBoard.CanMove( MoveDirection.Right ) );
+            Assert.False( newBoard.CanMove( MoveDirection.Top ) );
+            Assert.True( newBoard.CanMove( MoveDirection.Bottom ) );
 
-            newBoard = newBoard.Move(MoveDirection.Right);
+            newBoard = newBoard.Move( MoveDirection.Right );
 
-            Assert.Equal(CreateBoard(new byte[,]
+            Assert.Equal( CreateBoard( new byte[,]
             {
                 { 5, 2, 0 },
                 { 4, 1, 3 }
-            }), newBoard);
-            Assert.True(newBoard.CanMove(MoveDirection.Left));
-            Assert.False(newBoard.CanMove(MoveDirection.Right));
-            Assert.False(newBoard.CanMove(MoveDirection.Top));
-            Assert.True(newBoard.CanMove(MoveDirection.Bottom));
+            } ), newBoard );
+            Assert.True( newBoard.CanMove( MoveDirection.Left ) );
+            Assert.False( newBoard.CanMove( MoveDirection.Right ) );
+            Assert.False( newBoard.CanMove( MoveDirection.Top ) );
+            Assert.True( newBoard.CanMove( MoveDirection.Bottom ) );
 
-            newBoard = newBoard.Move(MoveDirection.Bottom);
+            newBoard = newBoard.Move( MoveDirection.Bottom );
 
-            Assert.Equal(CreateBoard(new byte[,]
+            Assert.Equal( CreateBoard( new byte[,]
             {
                 { 5, 2, 3 },
                 { 4, 1, 0 }
-            }), newBoard);
-            Assert.True(newBoard.CanMove(MoveDirection.Left));
-            Assert.False(newBoard.CanMove(MoveDirection.Right));
-            Assert.True(newBoard.CanMove(MoveDirection.Top));
-            Assert.False(newBoard.CanMove(MoveDirection.Bottom));
+            } ), newBoard );
+            Assert.True( newBoard.CanMove( MoveDirection.Left ) );
+            Assert.False( newBoard.CanMove( MoveDirection.Right ) );
+            Assert.True( newBoard.CanMove( MoveDirection.Top ) );
+            Assert.False( newBoard.CanMove( MoveDirection.Bottom ) );
 
-            newBoard = newBoard.Move(MoveDirection.Left)
-                .Move(MoveDirection.Left)
-                .Move(MoveDirection.Top);
+            newBoard = newBoard.Move( MoveDirection.Left )
+                .Move( MoveDirection.Left )
+                .Move( MoveDirection.Top );
 
-            Assert.Equal(CreateBoard(new byte[,]
+            Assert.Equal( CreateBoard( new byte[,]
             {
                 { 0, 2, 3 },
                 { 5, 4, 1 }
-            }), newBoard);
-            Assert.False(newBoard.CanMove(MoveDirection.Left));
-            Assert.True(newBoard.CanMove(MoveDirection.Right));
-            Assert.False(newBoard.CanMove(MoveDirection.Top));
-            Assert.True(newBoard.CanMove(MoveDirection.Bottom));
+            } ), newBoard );
+            Assert.False( newBoard.CanMove( MoveDirection.Left ) );
+            Assert.True( newBoard.CanMove( MoveDirection.Right ) );
+            Assert.False( newBoard.CanMove( MoveDirection.Top ) );
+            Assert.True( newBoard.CanMove( MoveDirection.Bottom ) );
 
-            Assert.Equal(CreateBoard(new byte[,]
+            Assert.Equal( CreateBoard( new byte[,]
             {
                 { 5, 1, 2 },
                 { 4, 3, 0 }
-            }), board);
+            } ), board );
         }
 
         [Fact]
         public void ShouldNotHaveDuplicates()
         {
-            var board = CreateBoard(new byte[,]
+            var board = CreateBoard( new byte[,]
             {
                 { 5, 1, 2 },
                 { 4, 3, 0 }
-            });
+            } );
 
             var set = new HashSet<Board>();
-            set.Add(board);
-            set.Add(board);
-            set.Add(board.Move(MoveDirection.Left));
-            set.Add(board.Move(MoveDirection.Left));
-            set.Add(board.Move(MoveDirection.Top));
-            set.Add(board.Move(MoveDirection.Top));
+            set.Add( board );
+            set.Add( board );
+            set.Add( board.Move( MoveDirection.Left ) );
+            set.Add( board.Move( MoveDirection.Left ) );
+            set.Add( board.Move( MoveDirection.Top ) );
+            set.Add( board.Move( MoveDirection.Top ) );
 
-            Assert.Equal(new HashSet<Board> { board, board.Move(MoveDirection.Left), board.Move(MoveDirection.Top) }, set);
+            Assert.Equal( new HashSet<Board> { board, board.Move( MoveDirection.Left ), board.Move( MoveDirection.Top ) }, set );
         }
 
         [Fact]
@@ -253,43 +253,43 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
                 },
             };
 
-            foreach (var data in unsolvableBoards)
+            foreach ( var data in unsolvableBoards )
             {
-                var board = CreateBoard(data);
+                var board = CreateBoard( data );
 
-                Assert.False(board.IsSolvable(), board.ToString());
+                Assert.False( board.IsSolvable(), board.ToString() );
             }
 
-            foreach (var data in solvableBoards)
+            foreach ( var data in solvableBoards )
             {
-                var board = CreateBoard(data);
+                var board = CreateBoard( data );
 
-                Assert.True(board.IsSolvable(), board.ToString());
+                Assert.True( board.IsSolvable(), board.ToString() );
             }
         }
 
         [Fact]
         public void CreateGoalBoardTest()
         {
-            Assert.Equal(Board.CreateGoalBoard(3, 3), new Board(new byte[,]
+            Assert.Equal( Board.CreateGoalBoard( 3, 3 ), new Board( new byte[,]
             {
                 { 1, 2, 3 },
                 { 4, 5, 6 },
                 { 7, 8, 0 }
-            }));
+            } ) );
 
-            Assert.Equal(Board.CreateGoalBoard(2, 3), new Board(new byte[,]
+            Assert.Equal( Board.CreateGoalBoard( 2, 3 ), new Board( new byte[,]
             {
                 { 1, 2, 3 },
                 { 4, 5, 0 }
-            }));
+            } ) );
         }
 
-        private Board CreateBoard(byte[,] data)
+        private Board CreateBoard( byte[,] data )
         {
-            var board = new Board(data);
+            var board = new Board( data );
 
-            Assert.True(board.IsCorrect(), "incorrect board used in tests");
+            Assert.True( board.IsCorrect(), "incorrect board used in tests" );
 
             return board;
         }

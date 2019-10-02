@@ -12,16 +12,16 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
         [Fact]
         public void SearchTest()
         {
-            var problem = new EightPuzzleProblem(new Board(new byte[,]
+            var problem = new EightPuzzleProblem( new Board( new byte[,]
             {
                 { 1, 2, 3 },
                 { 4, 5, 6 },
                 { 0, 7, 8 }
-            }));
+            } ) );
 
-            var result = problem.CreateDefaultSolver().Search(problem).ToList();
+            var result = problem.CreateDefaultSolver().Search( problem ).ToList();
 
-            Assert.NotEmpty(result);
+            Assert.NotEmpty( result );
         }
 
         public static IEnumerable<object[]> OptimalTestData
@@ -62,27 +62,27 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
         }
 
         [Theory]
-        [MemberData(nameof(OptimalTestData))]
-        public void ShouldFindOptimal(Board board, int optimalSolution)
+        [MemberData( nameof( OptimalTestData ) )]
+        public void ShouldFindOptimal( Board board, int optimalSolution )
         {
-            Assert.True(board.IsSolvable());
+            Assert.True( board.IsSolvable() );
 
-            var problem = new EightPuzzleProblem(board);
+            var problem = new EightPuzzleProblem( board );
 
-            var h = new ManhattanHeuristicFunction(Board.CreateGoalBoard(board.RowCount, board.ColumnCount));
+            var h = new ManhattanHeuristicFunction( Board.CreateGoalBoard( board.RowCount, board.ColumnCount ) );
 
             var algorithms = new ISearch<EightPuzzleState>[]
             {
-                new AStarSearch<EightPuzzleState>(h), 
-                new RecursiveBestFirstSearch<EightPuzzleState>(h), 
+                new AStarSearch<EightPuzzleState>(h),
+                new RecursiveBestFirstSearch<EightPuzzleState>(h),
             };
 
-            foreach (var algorithm in algorithms)
+            foreach ( var algorithm in algorithms )
             {
-                var result = algorithm.Search(problem).ToList();
+                var result = algorithm.Search( problem ).ToList();
 
-                Assert.NotEmpty(result);
-                Assert.Equal(optimalSolution, result.Count - 1);
+                Assert.NotEmpty( result );
+                Assert.Equal( optimalSolution, result.Count - 1 );
             }
         }
 
@@ -100,27 +100,27 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
                 //new { RowCount = 4, ColumnCount = 4 },
             };
 
-            foreach (var size in sizes)
+            foreach ( var size in sizes )
             {
-                for (int i = 0; i < 3; i++)
+                for ( int i = 0; i < 3; i++ )
                 {
-                    var problem = new EightPuzzleProblem(Board.GenerateSolvableBoard(size.RowCount, size.ColumnCount));
+                    var problem = new EightPuzzleProblem( Board.GenerateSolvableBoard( size.RowCount, size.ColumnCount ) );
 
-                    var result = problem.CreateDefaultSolver().Search(problem).ToList();
+                    var result = problem.CreateDefaultSolver().Search( problem ).ToList();
 
-                    Assert.NotEmpty(result);
+                    Assert.NotEmpty( result );
                 }
             }
 
-            foreach (var size in sizes.Take(3))
+            foreach ( var size in sizes.Take( 3 ) )
             {
-                for (int i = 0; i < 3; i++)
+                for ( int i = 0; i < 3; i++ )
                 {
-                    var problem = new EightPuzzleProblem(Board.GenerateSolvableBoard(size.RowCount, size.ColumnCount));
+                    var problem = new EightPuzzleProblem( Board.GenerateSolvableBoard( size.RowCount, size.ColumnCount ) );
 
-                    var result = new IterativeDeepeningSearch<EightPuzzleState>().Search(problem).ToList();
+                    var result = new IterativeDeepeningSearch<EightPuzzleState>().Search( problem ).ToList();
 
-                    Assert.NotEmpty(result);
+                    Assert.NotEmpty( result );
                 }
             }
         }

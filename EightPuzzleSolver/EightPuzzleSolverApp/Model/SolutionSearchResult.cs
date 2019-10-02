@@ -7,7 +7,7 @@ namespace EightPuzzleSolverApp.Model
 {
     public class SolutionAction
     {
-        public SolutionAction(MoveDirection direction)
+        public SolutionAction( MoveDirection direction )
         {
             Direction = direction;
         }
@@ -22,7 +22,7 @@ namespace EightPuzzleSolverApp.Model
 
     public class SolutionSearchResult
     {
-        public SolutionSearchResult(bool success, IList<EightPuzzleState> solution, TimeSpan timeElapsed)
+        public SolutionSearchResult( bool success, IList<EightPuzzleState> solution, TimeSpan timeElapsed )
         {
             Success = success;
             Solution = solution;
@@ -41,8 +41,8 @@ namespace EightPuzzleSolverApp.Model
         {
             get
             {
-                return Solution.Skip(1).Select(s => new SolutionAction(s.Direction.Value)).ToList();
-                
+                return Solution.Skip( 1 ).Select( s => new SolutionAction( s.Direction.Value ) ).ToList();
+
             }
         }
 

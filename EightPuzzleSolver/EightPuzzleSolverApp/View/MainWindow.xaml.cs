@@ -15,27 +15,27 @@ namespace EightPuzzleSolverApp.View
         {
             private readonly TextBlock _textBlock;
 
-            public Tile(Decorator element)
+            public Tile( Decorator element )
             {
                 Element = element;
-                _textBlock = (TextBlock) element.Child;
+                _textBlock = ( TextBlock ) element.Child;
             }
 
             private Decorator Element { get; }
 
-            public void SetText(string text)
+            public void SetText( string text )
             {
                 _textBlock.Text = text;
             }
 
-            public void SetVisibility(Visibility visibility)
+            public void SetVisibility( Visibility visibility )
             {
                 Element.Visibility = visibility;
             }
 
-            public void Move(MoveDirection direction, Action callback, int durationMs = 900)
+            public void Move( MoveDirection direction, Action callback, int durationMs = 900 )
             {
-                var duration = new Duration(TimeSpan.FromMilliseconds(durationMs));
+                var duration = new Duration( TimeSpan.FromMilliseconds( durationMs ) );
 
                 bool horizontal = direction.ColumnChange != 0;
                 int diff = horizontal ? direction.ColumnChange : direction.RowChange;
@@ -43,14 +43,14 @@ namespace EightPuzzleSolverApp.View
                 var transform = new TranslateTransform();
                 Element.RenderTransform = transform;
 
-                var anim = new DoubleAnimation(diff * TileSize, duration);
-                anim.Completed += (s, e) =>
+                var anim = new DoubleAnimation( diff * TileSize, duration );
+                anim.Completed += ( s, e ) =>
                 {
                     Element.RenderTransform = null;
 
                     callback();
                 };
-                transform.BeginAnimation(horizontal ? TranslateTransform.XProperty : TranslateTransform.YProperty, anim);
+                transform.BeginAnimation( horizontal ? TranslateTransform.XProperty : TranslateTransform.YProperty, anim );
             }
         }
 
@@ -65,17 +65,17 @@ namespace EightPuzzleSolverApp.View
             InitializeComponent();
         }
 
-        private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
+        private void MainWindow_OnLoaded( object sender, RoutedEventArgs e )
         {
-            _viewModel = (MainViewModel) DataContext;
+            _viewModel = ( MainViewModel ) DataContext;
 
             _viewModel.CreateBoard += VmOnCreateBoard;
             _viewModel.ShowMoves += VmShowMoves;
 
-            _viewModel.FillBoardCommand.Execute(null);
+            _viewModel.FillBoardCommand.Execute( null );
         }
 
-        private void VmOnCreateBoard(object sender, CreateBoardEventArgs args)
+        private void VmOnCreateBoard( object sender, CreateBoardEventArgs args )
         {
             var board = args.Board;
 
@@ -87,11 +87,11 @@ namespace EightPuzzleSolverApp.View
             grdBoard.Height = board.RowCount * TileSize;
             grdBoard.Width = board.ColumnCount * TileSize;
 
-            _tiles = new Tile[board.RowCount, board.ColumnCount];
+            _tiles = new Tile[ board.RowCount, board.ColumnCount ];
 
-            for (int i = 0; i < board.RowCount; i++)
+            for ( int i = 0; i < board.RowCount; i++ )
             {
-                for (int j = 0; j < board.ColumnCount; j++)
+                for ( int j = 0; j < board.ColumnCount; j++ )
                 {
                     var textBlock = new TextBlock
                     {
@@ -101,22 +101,22 @@ namespace EightPuzzleSolverApp.View
                     };
                     var border = new Border
                     {
-                        Background = new SolidColorBrush(Colors.WhiteSmoke),
-                        CornerRadius = new CornerRadius(3),
-                        Margin = new Thickness(3),
+                        Background = new SolidColorBrush( Colors.WhiteSmoke ),
+                        CornerRadius = new CornerRadius( 3 ),
+                        Margin = new Thickness( 3 ),
                         Child = textBlock
                     };
 
-                    _tiles[i, j] = new Tile(border);
+                    _tiles[ i, j ] = new Tile( border );
 
-                    grdBoard.Children.Add(border);
+                    grdBoard.Children.Add( border );
                 }
             }
 
-            SetTileValues(board);
+            SetTileValues( board );
         }
 
-        private void VmShowMoves(object sender, EventArgs eventArgs)
+        private void VmShowMoves( object sender, EventArgs eventArgs )
         {
             ShowNextMove();
         }
@@ -125,46 +125,46 @@ namespace EightPuzzleSolverApp.View
         {
             var state = _viewModel.NextMoveState();
 
-            if (state == null)
+            if ( state == null )
                 return;
 
             var tilePos = state.Board.BlankTilePosition;
 
-            Debug.Assert(state.Direction != null, "state.Direction != null");
+            Debug.Assert( state.Direction != null, "state.Direction != null" );
 
             var direction = state.Direction.Value.Opposite();
 
-            _tiles[tilePos.Row, tilePos.Column].Move(direction, () =>
-            {
-                SetTileValues(state.Board);
+            _tiles[ tilePos.Row, tilePos.Column ].Move( direction, () =>
+               {
+                   SetTileValues( state.Board );
 
-                ShowNextMove();
-            });
+                   ShowNextMove();
+               } );
         }
 
-        private void SetTileValues(Board board)
+        private void SetTileValues( Board board )
         {
-            for (int i = 0; i < board.RowCount; i++)
+            for ( int i = 0; i < board.RowCount; i++ )
             {
-                for (int j = 0; j < board.ColumnCount; j++)
+                for ( int j = 0; j < board.ColumnCount; j++ )
                 {
-                    int val = board[i, j];
+                    int val = board[ i, j ];
 
-                    var tile = _tiles[i, j];
+                    var tile = _tiles[ i, j ];
 
-                    tile.SetVisibility(val == 0 ? Visibility.Hidden : Visibility.Visible);
+                    tile.SetVisibility( val == 0 ? Visibility.Hidden : Visibility.Visible );
 
-                    tile.SetText(val.ToString());
+                    tile.SetText( val.ToString() );
                 }
             }
         }
 
 
-        private void lstMoves_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lstMoves_OnSelectionChanged( object sender, SelectionChangedEventArgs e )
         {
-            if (e.AddedItems.Count > 0)
+            if ( e.AddedItems.Count > 0 )
             {
-                ((ListBox)sender).ScrollIntoView(e.AddedItems[0]);
+                ( ( ListBox ) sender ).ScrollIntoView( e.AddedItems[ 0 ] );
             }
         }
     }
