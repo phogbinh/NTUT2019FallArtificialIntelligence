@@ -91,6 +91,7 @@
     <Compile Include="Model\IPuzzleSolverService.cs" />
     <Compile Include="Model\SolutionSearchResult.cs" />
     <Compile Include="ViewModel\CreateBoardEventArgs.cs" />
+    <Compile Include="ViewModel\SetBoardImageEventArgs.cs" />
     <Compile Include="View\DialogService.cs" />
     <Compile Include="View\IDialogService.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -141,11 +142,6 @@
       <Project>{f8ba8f24-0af0-4351-b67c-73f601a6144d}</Project>
       <Name>EightPuzzleSolver</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\img_default.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.ico">

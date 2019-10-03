@@ -69,6 +69,13 @@ namespace EightPuzzleSolverApp.ViewModel
         /// </summary>
         public event ShowMovesHandler ShowMoves;
 
+        public delegate void SetBoardImageHandler( object kSender, SetBoardImageEventArgs kEventArgs );
+
+        /// <summary>
+        /// Occurs when the board image is set
+        /// </summary>
+        public event SetBoardImageHandler SetBoardImage;
+
         private EWorkState _state = EWorkState.IDLE;
         public EWorkState State
         {
@@ -154,7 +161,7 @@ namespace EightPuzzleSolverApp.ViewModel
             }
         }
 
-        private BitmapImage m_kBoardImage;
+        private BitmapImage m_kBoardImage = null;
         public BitmapImage BoardImage
         {
             get
@@ -547,7 +554,13 @@ namespace EightPuzzleSolverApp.ViewModel
             if ( kDialog.ShowDialog() == true )
             {
                 BoardImage = CreateBitmapImageFromImageName( kDialog.FileName );
+                OnSetBoardImage( new SetBoardImageEventArgs( BoardImage ) );
             }
+        }
+
+        private void OnSetBoardImage( SetBoardImageEventArgs kEventArgs )
+        {
+            SetBoardImage?.Invoke( this, kEventArgs );
         }
 
         private BitmapImage CreateBitmapImageFromImageName( string strImageName )

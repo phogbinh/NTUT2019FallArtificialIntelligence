@@ -1,11 +1,13 @@
 ﻿using EightPuzzleSolver.EightPuzzle;
 using EightPuzzleSolverApp.ViewModel;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 
 namespace EightPuzzleSolverApp.View
 {
@@ -63,6 +65,7 @@ namespace EightPuzzleSolverApp.View
         private const int TILE_SIZE = 70;
 
         private Tile[,] m_kTiles;
+        private List<CroppedBitmap> m_kBoardImages;
 
         public MainWindow()
         {
@@ -75,6 +78,7 @@ namespace EightPuzzleSolverApp.View
 
             _viewModel.CreateBoard += VmOnCreateBoard;
             _viewModel.ShowMoves += VmShowMoves;
+            _viewModel.SetBoardImage += VmSetBoardImage;
 
             _viewModel.FillBoardCommand.Execute( null );
         }
@@ -85,6 +89,7 @@ namespace EightPuzzleSolverApp.View
             InitializeTiles( kBoard );
             AssignOnTileClickedHandler();
             DecorateGridBoard( kBoard );
+            m_kBoardImages = CreateCroppedImages( _viewModel.BoardImage, kBoard.RowCount, kBoard.ColumnCount );
             SetTileValues( kBoard );
         }
 
@@ -189,6 +194,38 @@ namespace EightPuzzleSolverApp.View
             }, TILE_MOVE_DURATION_MSEC );
         }
 
+        private void VmSetBoardImage( object kSender, SetBoardImageEventArgs kEventArgs )
+        {
+            BitmapImage kBoardImage = kEventArgs.BoardImage;
+            Board kCurrentBoard = _viewModel.CurrentBoard;
+            m_kBoardImages = CreateCroppedImages( kBoardImage, kCurrentBoard.RowCount, kCurrentBoard.ColumnCount );
+            SetTileValues( kCurrentBoard );
+        }
+
+        private List<CroppedBitmap> CreateCroppedImages( BitmapImage kBoardImage, int nRowCount, int nColumnCount )
+        {
+            if ( kBoardImage == null )
+            {
+                return null;
+            }
+
+            List<CroppedBitmap> kImages = new List<CroppedBitmap>();
+            int nCroppedImageWidth = Convert.ToInt32( kBoardImage.Width ) / nColumnCount;
+            int nCroppedImageHeight = Convert.ToInt32( kBoardImage.Height ) / nRowCount;
+            for ( int i = 0; i < nRowCount; i++ )
+            {
+                for ( int j = 0; j < nColumnCount; j++ )
+                {
+                    int nLeft = j * nCroppedImageWidth;
+                    int nTop = i * nCroppedImageHeight;
+                    Int32Rect kRectangle = new Int32Rect( nLeft, nTop, nCroppedImageWidth, nCroppedImageHeight );
+                    kImages.Add( new CroppedBitmap( kBoardImage, kRectangle ) );
+                }
+            }
+
+            return kImages;
+        }
+
         private void SetTileValues( Board kBoard )
         {
             for ( int i = 0; i < kBoard.RowCount; i++ )
@@ -198,11 +235,29 @@ namespace EightPuzzleSolverApp.View
                     int nValue = kBoard[ i, j ];
                     Tile kTile = m_kTiles[ i, j ];
                     kTile.SetVisibility( nValue == 0 ? Visibility.Hidden : Visibility.Visible );
-                    kTile.SetText( nValue.ToString() );
+                    if ( m_kBoardImages == null )
+                    {
+                        kTile.SetText( nValue.ToString() );
+                    }
+                    else
+                    {
+                        kTile.SetText( "" );
+                        if ( nValue == 0 )
+                        {
+                            continue;
+                        }
+                        kTile.Border.Background = CreateImageBush( m_kBoardImages[ nValue - 1 ] );
+                    }
                 }
             }
         }
 
+        private static ImageBrush CreateImageBush( CroppedBitmap kCroppedBitmap )
+        {
+            ImageBrush kImageBrush = new ImageBrush();
+            kImageBrush.ImageSource = kCroppedBitmap;
+            return kImageBrush;
+        }
 
         private void lstMoves_OnSelectionChanged( object sender, SelectionChangedEventArgs e )
         {
