@@ -11,7 +11,7 @@ namespace EightPuzzleSolverApp.View
 {
     public partial class MainWindow : Window
     {
-        private const int TILE_MOVE_DURATION_MSEC = 900;
+        private const int TILE_MOVE_DURATION_MSEC = 300;
 
         private class Tile
         {
