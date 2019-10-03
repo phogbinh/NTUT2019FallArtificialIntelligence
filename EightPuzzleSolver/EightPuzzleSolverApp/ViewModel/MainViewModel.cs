@@ -3,9 +3,11 @@ using EightPuzzleSolverApp.Model;
 using EightPuzzleSolverApp.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -404,6 +406,13 @@ namespace EightPuzzleSolverApp.ViewModel
 
         private void LoadBoard()
         {
+            OpenFileDialog kDialog = new OpenFileDialog();
+            kDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            if ( kDialog.ShowDialog() == true )
+            {
+                BoardInputText = File.ReadAllText( kDialog.FileName );
+                FillBoard();
+            }
         }
 
         private void SaveBoard()
