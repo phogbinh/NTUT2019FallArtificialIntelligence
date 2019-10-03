@@ -89,6 +89,8 @@ namespace EightPuzzleSolverApp.ViewModel
                 SaveBoardCommand.RaiseCanExecuteChanged();
                 FillBoardCommand.RaiseCanExecuteChanged();
                 EnterOrExitManualPlayCommand.RaiseCanExecuteChanged();
+                LoadImageCommand.RaiseCanExecuteChanged();
+                UnloadImageCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -355,6 +357,30 @@ namespace EightPuzzleSolverApp.ViewModel
             }
         }
 
+        private RelayCommand m_kLoadImageCommand;
+        public RelayCommand LoadImageCommand
+        {
+            get
+            {
+                return m_kLoadImageCommand
+                       ?? ( m_kLoadImageCommand = new RelayCommand(
+                           LoadImage,
+                           () => State == EWorkState.IDLE ) );
+            }
+        }
+
+        private RelayCommand m_kUnloadImageCommand;
+        public RelayCommand UnloadImageCommand
+        {
+            get
+            {
+                return m_kUnloadImageCommand
+                       ?? ( m_kUnloadImageCommand = new RelayCommand(
+                           UnloadImage,
+                           () => State == EWorkState.IDLE ) );
+            }
+        }
+
         public EightPuzzleState NextMoveState()
         {
             if ( CurrentMoveNumber + 1 > SearchResult.MoveCount || _cancellationToken.IsCancellationRequested )
@@ -490,6 +516,14 @@ namespace EightPuzzleSolverApp.ViewModel
         private void ExitManualPlay()
         {
             State = EWorkState.IDLE;
+        }
+
+        private void LoadImage()
+        {
+        }
+
+        private void UnloadImage()
+        {
         }
 
         private void Stop()
