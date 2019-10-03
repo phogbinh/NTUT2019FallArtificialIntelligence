@@ -189,19 +189,16 @@ namespace EightPuzzleSolverApp.View
             }, TILE_MOVE_DURATION_MSEC );
         }
 
-        private void SetTileValues( Board board )
+        private void SetTileValues( Board kBoard )
         {
-            for ( int i = 0; i < board.RowCount; i++ )
+            for ( int i = 0; i < kBoard.RowCount; i++ )
             {
-                for ( int j = 0; j < board.ColumnCount; j++ )
+                for ( int j = 0; j < kBoard.ColumnCount; j++ )
                 {
-                    int val = board[ i, j ];
-
-                    var tile = m_kTiles[ i, j ];
-
-                    tile.SetVisibility( val == 0 ? Visibility.Hidden : Visibility.Visible );
-
-                    tile.SetText( val.ToString() );
+                    int nValue = kBoard[ i, j ];
+                    Tile kTile = m_kTiles[ i, j ];
+                    kTile.SetVisibility( nValue == 0 ? Visibility.Hidden : Visibility.Visible );
+                    kTile.SetText( nValue.ToString() );
                 }
             }
         }
