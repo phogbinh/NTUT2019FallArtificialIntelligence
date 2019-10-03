@@ -13,27 +13,27 @@ namespace EightPuzzleSolverApp.View
     {
         private class Tile
         {
-            private readonly TextBlock _textBlock;
+            private readonly TextBlock m_kTextBlock;
 
-            public Tile( Border element )
+            public Tile( Border kBorder )
             {
-                Element = element;
-                _textBlock = ( TextBlock ) element.Child;
+                Border = kBorder;
+                m_kTextBlock = ( TextBlock ) kBorder.Child;
             }
 
-            private Border Element
+            private Border Border
             {
                 get;
             }
 
-            public void SetText( string text )
+            public void SetText( string strText )
             {
-                _textBlock.Text = text;
+                m_kTextBlock.Text = strText;
             }
 
-            public void SetVisibility( Visibility visibility )
+            public void SetVisibility( Visibility eVisibility )
             {
-                Element.Visibility = visibility;
+                Border.Visibility = eVisibility;
             }
 
             public void Move( MoveDirection kDirection, Action kCallbackFunc, int nDurationMs = 900 )
@@ -44,12 +44,12 @@ namespace EightPuzzleSolverApp.View
                 int nMoveDistance = bIsHorizontalMove ? kDirection.ColumnChange : kDirection.RowChange;
 
                 var kTransform = new TranslateTransform();
-                Element.RenderTransform = kTransform;
+                Border.RenderTransform = kTransform;
 
                 var kAnimation = new DoubleAnimation( nMoveDistance * TILE_SIZE, kDuration );
                 kAnimation.Completed += ( s, e ) =>
                 {
-                    Element.RenderTransform = null;
+                    Border.RenderTransform = null;
                     kCallbackFunc();
                 };
                 kTransform.BeginAnimation( bIsHorizontalMove ? TranslateTransform.XProperty : TranslateTransform.YProperty, kAnimation );
