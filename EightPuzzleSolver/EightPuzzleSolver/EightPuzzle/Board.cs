@@ -1,10 +1,8 @@
-﻿using System;
+﻿using EightPuzzleSolver.Helpers;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using EightPuzzleSolver.Helpers;
 
 namespace EightPuzzleSolver.EightPuzzle
 {

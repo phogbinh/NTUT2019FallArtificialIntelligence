@@ -1,6 +1,6 @@
-﻿using System.Threading;
+﻿using EightPuzzleSolver.EightPuzzle;
+using System.Threading;
 using System.Threading.Tasks;
-using EightPuzzleSolver.EightPuzzle;
 
 namespace EightPuzzleSolverApp.Model
 {

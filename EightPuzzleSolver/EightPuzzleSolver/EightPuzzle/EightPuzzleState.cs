@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using EightPuzzleSolver.Search;
+﻿using EightPuzzleSolver.Search;
+using System.Collections.Generic;
 
 namespace EightPuzzleSolver.EightPuzzle
 {

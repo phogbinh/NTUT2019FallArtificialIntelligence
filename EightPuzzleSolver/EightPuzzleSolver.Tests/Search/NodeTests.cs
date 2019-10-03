@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using EightPuzzleSolver.Search;
+﻿using EightPuzzleSolver.Search;
+using System.Linq;
 using Xunit;
 
 namespace EightPuzzleSolver.Tests.Search

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Priority_Queue;
+using System.Collections.Generic;
 using System.Threading;
-using Priority_Queue;
 
 namespace EightPuzzleSolver.Search.Algorithms
 {

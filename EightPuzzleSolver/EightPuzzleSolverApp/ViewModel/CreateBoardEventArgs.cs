@@ -1,5 +1,5 @@
-﻿using System;
-using EightPuzzleSolver.EightPuzzle;
+﻿using EightPuzzleSolver.EightPuzzle;
+using System;
 
 namespace EightPuzzleSolverApp.ViewModel
 {

@@ -1,14 +1,14 @@
-﻿using System;
+﻿using EightPuzzleSolver.EightPuzzle;
+using EightPuzzleSolverApp.Model;
+using EightPuzzleSolverApp.View;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using EightPuzzleSolver.EightPuzzle;
-using GalaSoft.MvvmLight;
-using EightPuzzleSolverApp.Model;
-using EightPuzzleSolverApp.View;
-using GalaSoft.MvvmLight.Command;
 
 namespace EightPuzzleSolverApp.ViewModel
 {

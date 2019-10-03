@@ -1,12 +1,12 @@
-﻿using System;
+﻿using EightPuzzleSolver.EightPuzzle;
+using EightPuzzleSolver.Search;
+using EightPuzzleSolver.Search.Algorithms;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using EightPuzzleSolver.EightPuzzle;
-using EightPuzzleSolver.Search;
-using EightPuzzleSolver.Search.Algorithms;
 
 namespace EightPuzzleSolverApp.Model
 {

@@ -1,7 +1,7 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Practices.ServiceLocation;
-using EightPuzzleSolverApp.Model;
+﻿using EightPuzzleSolverApp.Model;
 using EightPuzzleSolverApp.View;
+using GalaSoft.MvvmLight.Ioc;
+using Microsoft.Practices.ServiceLocation;
 
 namespace EightPuzzleSolverApp.ViewModel
 {

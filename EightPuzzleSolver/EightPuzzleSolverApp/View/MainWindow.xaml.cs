@@ -1,11 +1,11 @@
-﻿using System;
+﻿using EightPuzzleSolver.EightPuzzle;
+using EightPuzzleSolverApp.ViewModel;
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using EightPuzzleSolver.EightPuzzle;
-using EightPuzzleSolverApp.ViewModel;
 
 namespace EightPuzzleSolverApp.View
 {

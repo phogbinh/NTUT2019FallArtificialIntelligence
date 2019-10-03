@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using EightPuzzleSolver.EightPuzzle;
+﻿using EightPuzzleSolver.EightPuzzle;
+using System.Collections.Generic;
 using Xunit;
 
 namespace EightPuzzleSolver.Tests.EightPuzzle
