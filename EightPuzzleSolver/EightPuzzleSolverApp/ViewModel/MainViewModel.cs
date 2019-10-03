@@ -434,6 +434,7 @@ namespace EightPuzzleSolverApp.ViewModel
 
         private void EnterManualPlay()
         {
+            OnCreateBoard( new CreateBoardEventArgs( CurrentBoard ) );
             State = EWorkState.MANUAL_PLAYING;
         }
 
