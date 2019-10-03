@@ -178,6 +178,9 @@
                                 <DataTrigger Binding="{Binding State}" Value="{x:Static vm:EWorkState.IDLE}">
                                     <Setter Property="Control.Visibility" Value="Hidden"/>
                                 </DataTrigger>
+                                <DataTrigger Binding="{Binding State}" Value="{x:Static vm:EWorkState.MANUAL_PLAYING}">
+                                    <Setter Property="Control.Visibility" Value="Hidden"/>
+                                </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </Grid.Style>

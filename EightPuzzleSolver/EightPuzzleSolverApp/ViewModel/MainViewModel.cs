@@ -17,7 +17,8 @@ namespace EightPuzzleSolverApp.ViewModel
         IDLE,
         SEARCHING,
         SHOWING_MOVES,
-        STOPPING
+        STOPPING,
+        MANUAL_PLAYING
     }
 
     public sealed class MainViewModel : ViewModelBase, IDisposable
@@ -433,7 +434,7 @@ namespace EightPuzzleSolverApp.ViewModel
 
         private void EnterManualPlay()
         {
-            // Do something
+            State = EWorkState.MANUAL_PLAYING;
         }
 
         private void Stop()
