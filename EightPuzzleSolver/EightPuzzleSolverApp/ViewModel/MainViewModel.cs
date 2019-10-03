@@ -27,7 +27,9 @@ namespace EightPuzzleSolverApp.ViewModel
     {
         public IDialogService DialogService => _dialogService;
 
-        private const string TEXT_FILES_FILTER = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+        private const string ALL_FILES_FILTER = "All files(*.*)|*.*";
+        private const string TEXT_FILES_FILTER = "Text files (*.txt)|*.txt|" + ALL_FILES_FILTER;
+        private const string IMAGE_FILES_FILTER = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*jpg|" + ALL_FILES_FILTER;
         private readonly IPuzzleSolverService _puzzleSolverService;
         private readonly IDialogService _dialogService;
 
@@ -520,6 +522,12 @@ namespace EightPuzzleSolverApp.ViewModel
 
         private void LoadImage()
         {
+            OpenFileDialog kDialog = new OpenFileDialog();
+            kDialog.Filter = IMAGE_FILES_FILTER;
+            if ( kDialog.ShowDialog() == true )
+            {
+                // Do something
+            }
         }
 
         private void UnloadImage()
