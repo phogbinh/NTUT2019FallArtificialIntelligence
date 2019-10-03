@@ -109,7 +109,6 @@ namespace EightPuzzleSolverApp.View
                     };
                     var kBorder = new Border
                     {
-                        Background = new SolidColorBrush( Colors.WhiteSmoke ),
                         CornerRadius = new CornerRadius( 3 ),
                         Margin = new Thickness( 3 ),
                         Child = kTextBlock
@@ -238,6 +237,7 @@ namespace EightPuzzleSolverApp.View
                     if ( m_kBoardImages == null )
                     {
                         kTile.SetText( nValue.ToString() );
+                        kTile.Border.Background = new SolidColorBrush( Colors.WhiteSmoke );
                     }
                     else
                     {

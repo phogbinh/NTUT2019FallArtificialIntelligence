@@ -574,6 +574,8 @@ namespace EightPuzzleSolverApp.ViewModel
 
         private void UnloadImage()
         {
+            BoardImage = null;
+            OnSetBoardImage( new SetBoardImageEventArgs( BoardImage ) );
         }
 
         private void Stop()
