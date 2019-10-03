@@ -239,7 +239,7 @@
                     </Grid.Style>
 
                     <StackPanel Margin="3" Orientation="Horizontal">
-                        <TextBlock Text="Time elapsed: "/>
+                        <TextBlock Text="The selected algorithm solved the puzzle in "/>
                         <TextBlock FontWeight="Bold" Text="{Binding SearchResult.TimeElapsed.TotalSeconds, StringFormat={}{0:N3}}"/>
                         <TextBlock Text=" sec"/>
                     </StackPanel>
