@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Windows.Media.Imaging;
 
 namespace EightPuzzleSolverApp.ViewModel
 {
@@ -149,6 +150,25 @@ namespace EightPuzzleSolverApp.ViewModel
                 }
 
                 m_strBoardInputText = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private BitmapImage m_kBoardImage;
+        public BitmapImage BoardImage
+        {
+            get
+            {
+                return m_kBoardImage;
+            }
+            set
+            {
+                if ( m_kBoardImage == value )
+                {
+                    return;
+                }
+
+                m_kBoardImage = value;
                 RaisePropertyChanged();
             }
         }
@@ -526,8 +546,17 @@ namespace EightPuzzleSolverApp.ViewModel
             kDialog.Filter = IMAGE_FILES_FILTER;
             if ( kDialog.ShowDialog() == true )
             {
-                // Do something
+                BoardImage = CreateBitmapImageFromImageName( kDialog.FileName );
             }
+        }
+
+        private BitmapImage CreateBitmapImageFromImageName( string strImageName )
+        {
+            BitmapImage kBitmap = new BitmapImage();
+            kBitmap.BeginInit();
+            kBitmap.UriSource = new Uri( strImageName );
+            kBitmap.EndInit();
+            return kBitmap;
         }
 
         private void UnloadImage()
