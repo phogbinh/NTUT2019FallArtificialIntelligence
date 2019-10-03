@@ -524,5 +524,32 @@ namespace EightPuzzleSolverApp.ViewModel
                 _cancellationTokenSource.Dispose();
             }
         }
+
+        public EStatus MoveTile( Position kTilePosition, out MoveDirection kBlankTileMoveDirection )
+        {
+            Position kBlankTilePosition = CurrentBoard.BlankTilePosition;
+            kBlankTileMoveDirection = GetBlankTileMoveDirection( kBlankTilePosition, kTilePosition );
+            if ( kBlankTileMoveDirection.Equals( MoveDirection.None ) )
+            {
+                return EStatus.FAILURE;
+            }
+
+            CurrentBoard = CurrentBoard.Move( kBlankTileMoveDirection );
+            BoardInputText = BoardToText( CurrentBoard );
+            return EStatus.SUCCESS;
+        }
+
+        private MoveDirection GetBlankTileMoveDirection( Position kBlankTilePosition, Position kTilePosition )
+        {
+            foreach ( MoveDirection kDirection in MoveDirection.AllDirections )
+            {
+                Position kNewBlankTilePosition = kBlankTilePosition.Move( kDirection );
+                if ( kNewBlankTilePosition == kTilePosition )
+                {
+                    return kDirection;
+                }
+            }
+            return MoveDirection.None;
+        }
     }
 }

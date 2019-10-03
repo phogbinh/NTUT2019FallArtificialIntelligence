@@ -83,6 +83,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AppDef.cs" />
     <Compile Include="Converters\EnumToStringConverter.cs" />
     <Compile Include="Model\Def.cs" />
     <Compile Include="Model\PuzzleSolverService.cs" />

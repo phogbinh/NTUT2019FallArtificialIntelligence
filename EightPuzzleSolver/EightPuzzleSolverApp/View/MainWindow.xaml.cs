@@ -83,6 +83,7 @@ namespace EightPuzzleSolverApp.View
         {
             Board kBoard = kEventArgs.Board;
             InitializeTiles( kBoard );
+            AssignOnTileClickedHandler();
             DecorateGridBoard( kBoard );
             SetTileValues( kBoard );
         }
@@ -112,6 +113,38 @@ namespace EightPuzzleSolverApp.View
                     m_kTiles[ i, j ] = new Tile( kBorder, new Position( i, j ) );
                 }
             }
+        }
+
+        private void AssignOnTileClickedHandler()
+        {
+            foreach ( Tile kTile in m_kTiles )
+            {
+                kTile.Border.MouseDown += ( kDumpSender, kDumpEventArgs ) => OnTileClicked( kTile.Position );
+            }
+        }
+
+        private void OnTileClicked( Position kTilePosition )
+        {
+            if ( _viewModel.State != EWorkState.MANUAL_PLAYING )
+            {
+                return;
+            }
+
+            MoveDirection kBlankTileMoveDirection;
+            if ( _viewModel.MoveTile( kTilePosition, out kBlankTileMoveDirection ) == EStatus.SUCCESS )
+            {
+                ShowMoveTile( kBlankTileMoveDirection );
+            }
+        }
+
+        private void ShowMoveTile( MoveDirection kBlankTileMoveDirection )
+        {
+            Position kBlankTilePosition = _viewModel.CurrentBoard.BlankTilePosition;
+            MoveDirection kMoveDirection = kBlankTileMoveDirection.Opposite();
+            m_kTiles[ kBlankTilePosition.Row, kBlankTilePosition.Column ].Move( kMoveDirection, () =>
+            {
+                SetTileValues( _viewModel.CurrentBoard );
+            }, TILE_MOVE_DURATION_MSEC );
         }
 
         private void DecorateGridBoard( Board kBoard )
