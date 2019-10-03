@@ -27,6 +27,7 @@ namespace EightPuzzleSolverApp.ViewModel
     {
         public IDialogService DialogService => _dialogService;
 
+        private const string TEXT_FILES_FILTER = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
         private readonly IPuzzleSolverService _puzzleSolverService;
         private readonly IDialogService _dialogService;
 
@@ -380,7 +381,7 @@ namespace EightPuzzleSolverApp.ViewModel
         private void LoadBoard()
         {
             OpenFileDialog kDialog = new OpenFileDialog();
-            kDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            kDialog.Filter = TEXT_FILES_FILTER;
             if ( kDialog.ShowDialog() == true )
             {
                 BoardInputText = File.ReadAllText( kDialog.FileName );
@@ -391,7 +392,7 @@ namespace EightPuzzleSolverApp.ViewModel
         private void SaveBoard()
         {
             SaveFileDialog kDialog = new SaveFileDialog();
-            kDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            kDialog.Filter = TEXT_FILES_FILTER;
             if ( kDialog.ShowDialog() == true )
             {
                 File.WriteAllText( kDialog.FileName, BoardInputText );
