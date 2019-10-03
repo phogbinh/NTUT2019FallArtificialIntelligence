@@ -33,24 +33,23 @@ namespace EightPuzzleSolverApp.View
                 Element.Visibility = visibility;
             }
 
-            public void Move( MoveDirection direction, Action callback, int durationMs = 900 )
+            public void Move( MoveDirection kDirection, Action kCallbackFunc, int nDurationMs = 900 )
             {
-                var duration = new Duration( TimeSpan.FromMilliseconds( durationMs ) );
+                var kDuration = new Duration( TimeSpan.FromMilliseconds( nDurationMs ) );
 
-                bool horizontal = direction.ColumnChange != 0;
-                int diff = horizontal ? direction.ColumnChange : direction.RowChange;
+                bool bIsHorizontalMove = kDirection.ColumnChange != 0;
+                int nMoveDistance = bIsHorizontalMove ? kDirection.ColumnChange : kDirection.RowChange;
 
-                var transform = new TranslateTransform();
-                Element.RenderTransform = transform;
+                var kTransform = new TranslateTransform();
+                Element.RenderTransform = kTransform;
 
-                var anim = new DoubleAnimation( diff * TileSize, duration );
-                anim.Completed += ( s, e ) =>
+                var kAnimation = new DoubleAnimation( nMoveDistance * TileSize, kDuration );
+                kAnimation.Completed += ( s, e ) =>
                 {
                     Element.RenderTransform = null;
-
-                    callback();
+                    kCallbackFunc();
                 };
-                transform.BeginAnimation( horizontal ? TranslateTransform.XProperty : TranslateTransform.YProperty, anim );
+                kTransform.BeginAnimation( bIsHorizontalMove ? TranslateTransform.XProperty : TranslateTransform.YProperty, kAnimation );
             }
         }
 
@@ -123,23 +122,22 @@ namespace EightPuzzleSolverApp.View
 
         private void ShowNextMove()
         {
-            var state = _viewModel.NextMoveState();
-
-            if ( state == null )
+            EightPuzzleState kState = _viewModel.NextMoveState();
+            if ( kState == null )
+            {
                 return;
+            }                
 
-            var tilePos = state.Board.BlankTilePosition;
+            Position kBlankTilePosition = kState.Board.BlankTilePosition;
 
-            Debug.Assert( state.Direction != null, "state.Direction != null" );
+            Debug.Assert( kState.Direction != null, "state.Direction != null" );
+            MoveDirection kMoveDirection = kState.Direction.Value.Opposite();
 
-            var direction = state.Direction.Value.Opposite();
-
-            _tiles[ tilePos.Row, tilePos.Column ].Move( direction, () =>
-               {
-                   SetTileValues( state.Board );
-
-                   ShowNextMove();
-               } );
+            _tiles[ kBlankTilePosition.Row, kBlankTilePosition.Column ].Move( kMoveDirection, () =>
+            {
+                SetTileValues( kState.Board );
+                ShowNextMove();
+            } );
         }
 
         private void SetTileValues( Board board )

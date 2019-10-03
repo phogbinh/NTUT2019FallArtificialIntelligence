@@ -28,9 +28,7 @@ namespace EightPuzzleSolverApp.Model
 
             Stopwatch kStopwatch = new Stopwatch();
             kStopwatch.Start();
-
             List<EightPuzzleState> kResult = kSearch.Search( kProblem, kCancellationToken ).ToList();
-
             kStopwatch.Stop();
 
             return new SolutionSearchResult( kResult.Any(), kResult, kStopwatch.Elapsed );
