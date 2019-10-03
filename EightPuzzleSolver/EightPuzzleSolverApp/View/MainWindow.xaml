@@ -43,7 +43,7 @@
                     <Style>
                         <Setter Property="Control.IsEnabled" Value="False"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding State}" Value="{x:Static vm:WorkState.Idle}">
+                            <DataTrigger Binding="{Binding State}" Value="{x:Static vm:EWorkState.IDLE}">
                                 <Setter Property="Control.IsEnabled" Value="True"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -90,7 +90,7 @@
                         <Style>
                             <Setter Property="Control.IsEnabled" Value="False"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding State}" Value="{x:Static vm:WorkState.Idle}">
+                                <DataTrigger Binding="{Binding State}" Value="{x:Static vm:EWorkState.IDLE}">
                                     <Setter Property="Control.IsEnabled" Value="True"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -149,13 +149,13 @@
                             <Style>
                                 <Setter Property="Button.Content" Value="Solve"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding State}" Value="{x:Static vm:WorkState.Searching}">
+                                    <DataTrigger Binding="{Binding State}" Value="{x:Static vm:EWorkState.SEARCHING}">
                                         <Setter Property="Button.Content" Value="Stop"/>
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding State}" Value="{x:Static vm:WorkState.ShowingMoves}">
+                                    <DataTrigger Binding="{Binding State}" Value="{x:Static vm:EWorkState.SHOWING_MOVES}">
                                         <Setter Property="Button.Content" Value="Stop"/>
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding State}" Value="{x:Static vm:WorkState.Stopping}">
+                                    <DataTrigger Binding="{Binding State}" Value="{x:Static vm:EWorkState.STOPPING}">
                                         <Setter Property="Button.Content" Value="Stop"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -175,7 +175,7 @@
                         <Style>
                             <Setter Property="Control.Visibility" Value="Visible"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding State}" Value="{x:Static vm:WorkState.Idle}">
+                                <DataTrigger Binding="{Binding State}" Value="{x:Static vm:EWorkState.IDLE}">
                                     <Setter Property="Control.Visibility" Value="Hidden"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -188,7 +188,7 @@
                             <Style>
                                 <Setter Property="ProgressBar.IsIndeterminate" Value="True"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding State}" Value="{x:Static vm:WorkState.ShowingMoves}">
+                                    <DataTrigger Binding="{Binding State}" Value="{x:Static vm:EWorkState.SHOWING_MOVES}">
                                         <Setter Property="ProgressBar.IsIndeterminate" Value="False"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -200,7 +200,7 @@
                             <Style>
                                 <Setter Property="Control.Visibility" Value="Collapsed"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding State}" Value="{x:Static vm:WorkState.ShowingMoves}">
+                                    <DataTrigger Binding="{Binding State}" Value="{x:Static vm:EWorkState.SHOWING_MOVES}">
                                         <Setter Property="Control.Visibility" Value="Visible"/>
                                     </DataTrigger>
                                 </Style.Triggers>

@@ -12,12 +12,12 @@ using GalaSoft.MvvmLight.Command;
 
 namespace EightPuzzleSolverApp.ViewModel
 {
-    public enum WorkState
+    public enum EWorkState
     {
-        Idle,
-        Searching,
-        ShowingMoves,
-        Stopping
+        IDLE,
+        SEARCHING,
+        SHOWING_MOVES,
+        STOPPING
     }
 
     public sealed class MainViewModel : ViewModelBase, IDisposable
@@ -60,8 +60,8 @@ namespace EightPuzzleSolverApp.ViewModel
         /// </summary>
         public event ShowMovesHandler ShowMoves;
 
-        private WorkState _state = WorkState.Idle;
-        public WorkState State
+        private EWorkState _state = EWorkState.IDLE;
+        public EWorkState State
         {
             get
             {
@@ -264,7 +264,7 @@ namespace EightPuzzleSolverApp.ViewModel
                 return _generateBoardCommand
                        ?? ( _generateBoardCommand = new RelayCommand(
                            GenerateBoard,
-                           () => State == WorkState.Idle ) );
+                           () => State == EWorkState.IDLE ) );
             }
         }
 
@@ -277,7 +277,7 @@ namespace EightPuzzleSolverApp.ViewModel
                        ?? ( _solveOrStopCommand = new RelayCommand(
                            () =>
                            {
-                               if ( State == WorkState.Idle )
+                               if ( State == EWorkState.IDLE )
                                {
                                    Solve();
                                }
@@ -286,7 +286,7 @@ namespace EightPuzzleSolverApp.ViewModel
                                    Stop();
                                }
                            },
-                           () => State == WorkState.Idle || State == WorkState.Searching || State == WorkState.ShowingMoves ) );
+                           () => State == EWorkState.IDLE || State == EWorkState.SEARCHING || State == EWorkState.SHOWING_MOVES ) );
             }
         }
 
@@ -298,7 +298,7 @@ namespace EightPuzzleSolverApp.ViewModel
                 return _fillBoardCommand
                        ?? ( _fillBoardCommand = new RelayCommand(
                            FillBoard,
-                           () => State == WorkState.Idle ) );
+                           () => State == EWorkState.IDLE ) );
             }
         }
 
@@ -310,7 +310,7 @@ namespace EightPuzzleSolverApp.ViewModel
                 return _showMovesCommand
                        ?? ( _showMovesCommand = new RelayCommand(
                            StartShowingMoves,
-                           () => State == WorkState.Idle && SearchResult != null && SearchResult.Success ) );
+                           () => State == EWorkState.IDLE && SearchResult != null && SearchResult.Success ) );
             }
         }
 
@@ -322,7 +322,7 @@ namespace EightPuzzleSolverApp.ViewModel
                 return m_kEnterManualPlayCommand
                        ?? ( m_kEnterManualPlayCommand = new RelayCommand(
                            EnterManualPlay,
-                           () => State == WorkState.Idle ) );
+                           () => State == EWorkState.IDLE ) );
             }
         }
 
@@ -330,7 +330,7 @@ namespace EightPuzzleSolverApp.ViewModel
         {
             if ( CurrentMoveNumber + 1 > SearchResult.MoveCount || _cancellationToken.IsCancellationRequested )
             {
-                State = WorkState.Idle;
+                State = EWorkState.IDLE;
 
                 return null;
             }
@@ -390,7 +390,7 @@ namespace EightPuzzleSolverApp.ViewModel
 
             SearchResult = null;
 
-            State = WorkState.Searching;
+            State = EWorkState.SEARCHING;
 
             try
             {
@@ -415,7 +415,7 @@ namespace EightPuzzleSolverApp.ViewModel
                 _dialogService.ShowError( ex.Message );
             }
 
-            State = WorkState.Idle;
+            State = EWorkState.IDLE;
         }
 
         private void StartShowingMoves()
@@ -424,7 +424,7 @@ namespace EightPuzzleSolverApp.ViewModel
 
             CreateCancellationToken();
 
-            State = WorkState.ShowingMoves;
+            State = EWorkState.SHOWING_MOVES;
 
             CurrentMoveNumber = 0;
 
@@ -438,7 +438,7 @@ namespace EightPuzzleSolverApp.ViewModel
 
         private void Stop()
         {
-            State = WorkState.Stopping;
+            State = EWorkState.STOPPING;
 
             _cancellationTokenSource.Cancel();
         }
