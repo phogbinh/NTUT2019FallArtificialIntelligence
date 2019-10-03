@@ -377,6 +377,21 @@ namespace EightPuzzleSolverApp.ViewModel
             FillBoard();
         }
 
+        private void LoadBoard()
+        {
+            OpenFileDialog kDialog = new OpenFileDialog();
+            kDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            if ( kDialog.ShowDialog() == true )
+            {
+                BoardInputText = File.ReadAllText( kDialog.FileName );
+                FillBoard();
+            }
+        }
+
+        private void SaveBoard()
+        {
+        }
+
         private void FillBoard()
         {
             Board board;
@@ -402,21 +417,6 @@ namespace EightPuzzleSolverApp.ViewModel
             CurrentBoard = board;
 
             OnCreateBoard( new CreateBoardEventArgs( board ) );
-        }
-
-        private void LoadBoard()
-        {
-            OpenFileDialog kDialog = new OpenFileDialog();
-            kDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            if ( kDialog.ShowDialog() == true )
-            {
-                BoardInputText = File.ReadAllText( kDialog.FileName );
-                FillBoard();
-            }
-        }
-
-        private void SaveBoard()
-        {
         }
 
         private async void Solve()
