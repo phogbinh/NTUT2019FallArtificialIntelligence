@@ -390,6 +390,12 @@ namespace EightPuzzleSolverApp.ViewModel
 
         private void SaveBoard()
         {
+            SaveFileDialog kDialog = new SaveFileDialog();
+            kDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            if ( kDialog.ShowDialog() == true )
+            {
+                File.WriteAllText( kDialog.FileName, BoardInputText );
+            }
         }
 
         private void FillBoard()
