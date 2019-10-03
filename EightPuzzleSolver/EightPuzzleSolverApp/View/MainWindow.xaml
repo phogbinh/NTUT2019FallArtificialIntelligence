@@ -250,7 +250,7 @@
         <Grid Grid.Row="1" Margin="5,6">
             <Viewbox Grid.Column="1" Margin="3,0" Stretch="Uniform">
                 <Border BorderBrush="#663333" BorderThickness="2">
-                    <UniformGrid Width="200" Height="200" Name="grdBoard" Rows="3" Columns="3" Background="#9C754E">
+                    <UniformGrid Width="200" Height="200" Name="m_kGridBoard" Rows="3" Columns="3" Background="#9C754E">
                         <Border Background="WhiteSmoke" Margin="3" CornerRadius="3">
                             <TextBlock Text="8" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
                         </Border>

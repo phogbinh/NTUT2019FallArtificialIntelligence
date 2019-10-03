@@ -46,7 +46,7 @@ namespace EightPuzzleSolverApp.View
                 var kTransform = new TranslateTransform();
                 Element.RenderTransform = kTransform;
 
-                var kAnimation = new DoubleAnimation( nMoveDistance * TileSize, kDuration );
+                var kAnimation = new DoubleAnimation( nMoveDistance * TILE_SIZE, kDuration );
                 kAnimation.Completed += ( s, e ) =>
                 {
                     Element.RenderTransform = null;
@@ -58,9 +58,9 @@ namespace EightPuzzleSolverApp.View
 
         private MainViewModel _viewModel;
 
-        private const int TileSize = 70;
+        private const int TILE_SIZE = 70;
 
-        private Tile[,] _tiles;
+        private Tile[,] m_kTiles;
 
         public MainWindow()
         {
@@ -77,45 +77,45 @@ namespace EightPuzzleSolverApp.View
             _viewModel.FillBoardCommand.Execute( null );
         }
 
-        private void VmOnCreateBoard( object sender, CreateBoardEventArgs args )
+        private void VmOnCreateBoard( object kSender, CreateBoardEventArgs kEventArgs )
         {
-            var board = args.Board;
+            Board kBoard = kEventArgs.Board;
 
-            grdBoard.Children.Clear();
+            m_kGridBoard.Children.Clear();
 
-            grdBoard.Rows = board.RowCount;
-            grdBoard.Columns = board.ColumnCount;
+            m_kGridBoard.Rows = kBoard.RowCount;
+            m_kGridBoard.Columns = kBoard.ColumnCount;
 
-            grdBoard.Height = board.RowCount * TileSize;
-            grdBoard.Width = board.ColumnCount * TileSize;
+            m_kGridBoard.Height = kBoard.RowCount * TILE_SIZE;
+            m_kGridBoard.Width = kBoard.ColumnCount * TILE_SIZE;
 
-            _tiles = new Tile[ board.RowCount, board.ColumnCount ];
+            m_kTiles = new Tile[ kBoard.RowCount, kBoard.ColumnCount ];
 
-            for ( int i = 0; i < board.RowCount; i++ )
+            for ( int i = 0; i < kBoard.RowCount; i++ )
             {
-                for ( int j = 0; j < board.ColumnCount; j++ )
+                for ( int j = 0; j < kBoard.ColumnCount; j++ )
                 {
-                    var textBlock = new TextBlock
+                    var kTextBlock = new TextBlock
                     {
                         FontSize = 20,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center
                     };
-                    var border = new Border
+                    var kBorder = new Border
                     {
                         Background = new SolidColorBrush( Colors.WhiteSmoke ),
                         CornerRadius = new CornerRadius( 3 ),
                         Margin = new Thickness( 3 ),
-                        Child = textBlock
+                        Child = kTextBlock
                     };
 
-                    _tiles[ i, j ] = new Tile( border );
+                    m_kTiles[ i, j ] = new Tile( kBorder );
 
-                    grdBoard.Children.Add( border );
+                    m_kGridBoard.Children.Add( kBorder );
                 }
             }
 
-            SetTileValues( board );
+            SetTileValues( kBoard );
         }
 
         private void VmShowMoves( object sender, EventArgs eventArgs )
@@ -136,7 +136,7 @@ namespace EightPuzzleSolverApp.View
             Debug.Assert( kState.Direction != null, "state.Direction != null" );
             MoveDirection kMoveDirection = kState.Direction.Value.Opposite();
 
-            _tiles[ kBlankTilePosition.Row, kBlankTilePosition.Column ].Move( kMoveDirection, () =>
+            m_kTiles[ kBlankTilePosition.Row, kBlankTilePosition.Column ].Move( kMoveDirection, () =>
             {
                 SetTileValues( kState.Board );
                 ShowNextMove();
@@ -151,7 +151,7 @@ namespace EightPuzzleSolverApp.View
                 {
                     int val = board[ i, j ];
 
-                    var tile = _tiles[ i, j ];
+                    var tile = m_kTiles[ i, j ];
 
                     tile.SetVisibility( val == 0 ? Visibility.Hidden : Visibility.Visible );
 
