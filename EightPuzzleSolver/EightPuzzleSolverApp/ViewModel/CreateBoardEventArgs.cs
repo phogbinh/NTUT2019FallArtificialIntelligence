@@ -15,6 +15,9 @@ namespace EightPuzzleSolverApp.ViewModel
             Board = board;
         }
 
-        public Board Board { get; set; }
+        public Board Board
+        {
+            get; set;
+        }
     }
 }

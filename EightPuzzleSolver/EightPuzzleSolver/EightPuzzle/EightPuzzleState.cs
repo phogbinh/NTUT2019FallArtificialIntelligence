@@ -23,21 +23,33 @@ namespace EightPuzzleSolver.EightPuzzle
             Direction = direction;
         }
 
-        public Board Board { get; }
+        public Board Board
+        {
+            get;
+        }
 
-        public EightPuzzleState Parent { get; }
+        public EightPuzzleState Parent
+        {
+            get;
+        }
 
         public bool IsRootState => Parent == null;
 
         /// <summary>
         /// Direction of the blank tile movement that was applied to the previous state
         /// </summary>
-        public MoveDirection? Direction { get; }
+        public MoveDirection? Direction
+        {
+            get;
+        }
 
         /// <summary>
         /// Cost of getting to this state from the previous state
         /// </summary>
-        public int Cost { get; }
+        public int Cost
+        {
+            get;
+        }
 
         public ISet<EightPuzzleState> NextStates()
         {

@@ -25,9 +25,15 @@ namespace EightPuzzleSolver.Tests.Search
             NextStatesList = nextStatesList;
         }
 
-        public string Name { get; }
+        public string Name
+        {
+            get;
+        }
 
-        public int Cost { get; }
+        public int Cost
+        {
+            get;
+        }
 
         public IEnumerable<DummyProblemState> NextStatesList { get; set; } = new DummyProblemState[ 0 ];
 

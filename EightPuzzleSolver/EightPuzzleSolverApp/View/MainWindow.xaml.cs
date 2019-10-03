@@ -21,7 +21,10 @@ namespace EightPuzzleSolverApp.View
                 _textBlock = ( TextBlock ) element.Child;
             }
 
-            private Decorator Element { get; }
+            private Decorator Element
+            {
+                get;
+            }
 
             public void SetText( string text )
             {
@@ -126,7 +129,7 @@ namespace EightPuzzleSolverApp.View
             if ( kState == null )
             {
                 return;
-            }                
+            }
 
             Position kBlankTilePosition = kState.Board.BlankTilePosition;
 

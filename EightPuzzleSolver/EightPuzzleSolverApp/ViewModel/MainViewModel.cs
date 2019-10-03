@@ -63,7 +63,10 @@ namespace EightPuzzleSolverApp.ViewModel
         private WorkState _state = WorkState.Idle;
         public WorkState State
         {
-            get { return _state; }
+            get
+            {
+                return _state;
+            }
             set
             {
                 if ( _state == value )
@@ -85,7 +88,10 @@ namespace EightPuzzleSolverApp.ViewModel
         private int _rowCount = 3;
         public int RowCount
         {
-            get { return _rowCount; }
+            get
+            {
+                return _rowCount;
+            }
             set
             {
                 if ( _rowCount == value )
@@ -101,7 +107,10 @@ namespace EightPuzzleSolverApp.ViewModel
         private int _columnCount = 3;
         public int ColumnCount
         {
-            get { return _columnCount; }
+            get
+            {
+                return _columnCount;
+            }
             set
             {
                 if ( _columnCount == value )
@@ -117,7 +126,10 @@ namespace EightPuzzleSolverApp.ViewModel
         private string _boardInputText = "8 6 7\r\n2 5 4\r\n3 0 1";
         public string BoardInputText
         {
-            get { return _boardInputText; }
+            get
+            {
+                return _boardInputText;
+            }
             set
             {
                 if ( _boardInputText == value )
@@ -134,7 +146,9 @@ namespace EightPuzzleSolverApp.ViewModel
         public Board CurrentBoard
         {
             get
-            { return _currentBoard; }
+            {
+                return _currentBoard;
+            }
             set
             {
                 if ( _currentBoard == value )
@@ -151,7 +165,9 @@ namespace EightPuzzleSolverApp.ViewModel
         public SolutionSearchResult SearchResult
         {
             get
-            { return _searchResult; }
+            {
+                return _searchResult;
+            }
             set
             {
                 if ( _searchResult == value )
@@ -170,7 +186,9 @@ namespace EightPuzzleSolverApp.ViewModel
         public int CurrentMoveNumber
         {
             get
-            { return _currentMoveNumber; }
+            {
+                return _currentMoveNumber;
+            }
             set
             {
                 if ( _currentMoveNumber == value )
@@ -187,7 +205,10 @@ namespace EightPuzzleSolverApp.ViewModel
 
         public int CurrentMoveIndex => CurrentMoveNumber - 1;
 
-        public static IList<EAlgorithm> Algorithms { get; } = new[]
+        public static IList<EAlgorithm> Algorithms
+        {
+            get;
+        } = new[]
         {
             EAlgorithm.A_STAR,
             EAlgorithm.RECURSIVE_BEST_FIRST_SEARCH,
@@ -199,7 +220,9 @@ namespace EightPuzzleSolverApp.ViewModel
         public EAlgorithm SelectedAlgorithm
         {
             get
-            { return _selectedAlgorithm; }
+            {
+                return _selectedAlgorithm;
+            }
             set
             {
                 if ( _selectedAlgorithm == value )
@@ -218,7 +241,9 @@ namespace EightPuzzleSolverApp.ViewModel
         public EHeuristicFunction SelectedHeuristicFunction
         {
             get
-            { return _selectedHeuristicFunction; }
+            {
+                return _selectedHeuristicFunction;
+            }
             set
             {
                 if ( _selectedHeuristicFunction == value )
@@ -383,7 +408,8 @@ namespace EightPuzzleSolverApp.ViewModel
                 }
             }
             catch ( OperationCanceledException )
-            { }
+            {
+            }
             catch ( Exception ex )
             {
                 _dialogService.ShowError( ex.Message );

@@ -19,7 +19,10 @@ namespace EightPuzzleSolver.EightPuzzle
         {
         }
 
-        public Board GoalBoard { get; }
+        public Board GoalBoard
+        {
+            get;
+        }
 
         public override bool IsGoalState( EightPuzzleState state )
         {

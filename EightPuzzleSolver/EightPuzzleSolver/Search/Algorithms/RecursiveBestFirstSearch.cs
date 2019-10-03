@@ -135,11 +135,20 @@ namespace EightPuzzleSolver.Search.Algorithms
                 FCostLimit = fCostLimit;
             }
 
-            public Node<TProblemState> Solution { get; }
+            public Node<TProblemState> Solution
+            {
+                get;
+            }
 
-            public SearchOutcome Outcome { get; }
+            public SearchOutcome Outcome
+            {
+                get;
+            }
 
-            public double FCostLimit { get; }
+            public double FCostLimit
+            {
+                get;
+            }
         }
     }
 }

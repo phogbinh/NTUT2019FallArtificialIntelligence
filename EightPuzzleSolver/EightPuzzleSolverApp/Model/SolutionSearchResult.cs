@@ -12,7 +12,10 @@ namespace EightPuzzleSolverApp.Model
             Direction = direction;
         }
 
-        public MoveDirection Direction { get; }
+        public MoveDirection Direction
+        {
+            get;
+        }
 
         public override string ToString()
         {
@@ -29,11 +32,20 @@ namespace EightPuzzleSolverApp.Model
             TimeElapsed = timeElapsed;
         }
 
-        public bool Success { get; }
+        public bool Success
+        {
+            get;
+        }
 
-        public IList<EightPuzzleState> Solution { get; }
+        public IList<EightPuzzleState> Solution
+        {
+            get;
+        }
 
-        public TimeSpan TimeElapsed { get; }
+        public TimeSpan TimeElapsed
+        {
+            get;
+        }
 
         public int MoveCount => Solution?.Count - 1 ?? -1;
 

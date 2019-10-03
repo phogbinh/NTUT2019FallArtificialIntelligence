@@ -78,9 +78,15 @@ namespace EightPuzzleSolver.EightPuzzle
             Debug.Assert( this[ _blankTilePos.Value ] == 0 );
         }
 
-        public int ColumnCount { get; }
+        public int ColumnCount
+        {
+            get;
+        }
 
-        public byte RowCount { get; }
+        public byte RowCount
+        {
+            get;
+        }
 
         public byte this[ int row, int col ] => _data[ To1DCoord( row, col, ColumnCount ) ];
 

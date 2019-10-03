@@ -8,7 +8,10 @@ namespace EightPuzzleSolver.Search
         /// <summary>
         /// Cost of getting to this state from the previous state
         /// </summary>
-        int Cost { get; }
+        int Cost
+        {
+            get;
+        }
 
         /// <summary>
         /// Returns the states available from this state

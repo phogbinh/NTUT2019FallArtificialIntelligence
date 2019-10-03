@@ -10,8 +10,14 @@ namespace EightPuzzleSolver.EightPuzzle
             Column = nColumn;
         }
 
-        public int Row { get; }
-        public int Column { get; }
+        public int Row
+        {
+            get;
+        }
+        public int Column
+        {
+            get;
+        }
 
         public Position Move( MoveDirection direction )
         {

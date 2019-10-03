@@ -9,7 +9,10 @@ namespace EightPuzzleSolver.Search
             InitialState = initialState;
         }
 
-        public TProblemState InitialState { get; }
+        public TProblemState InitialState
+        {
+            get;
+        }
 
         /// <summary>
         /// Checks if the state is the goal state

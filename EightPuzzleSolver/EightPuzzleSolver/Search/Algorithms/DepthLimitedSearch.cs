@@ -14,7 +14,10 @@ namespace EightPuzzleSolver.Search.Algorithms
             Limit = limit;
         }
 
-        public int Limit { get; }
+        public int Limit
+        {
+            get;
+        }
 
         /// <summary>
         /// True when search failed because the limit is reached

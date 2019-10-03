@@ -21,14 +21,23 @@ namespace EightPuzzleSolver.Search
             }
         }
 
-        public TProblemState State { get; }
+        public TProblemState State
+        {
+            get;
+        }
 
-        public Node<TProblemState> Parent { get; }
+        public Node<TProblemState> Parent
+        {
+            get;
+        }
 
         /// <summary>
         /// The cost of the path from the initial state to the node
         /// </summary>
-        public int PathCost { get; }
+        public int PathCost
+        {
+            get;
+        }
 
         public bool IsRootNode => Parent == null;
 

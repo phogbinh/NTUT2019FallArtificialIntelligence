@@ -19,11 +19,20 @@ namespace EightPuzzleSolver.EightPuzzle
             ColumnChange = columnChange;
         }
 
-        public string Name { get; }
+        public string Name
+        {
+            get;
+        }
 
-        public int RowChange { get; }
+        public int RowChange
+        {
+            get;
+        }
 
-        public int ColumnChange { get; }
+        public int ColumnChange
+        {
+            get;
+        }
 
         [Pure]
         public MoveDirection Opposite()
