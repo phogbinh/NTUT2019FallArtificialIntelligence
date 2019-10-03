@@ -15,13 +15,13 @@ namespace EightPuzzleSolverApp.View
         {
             private readonly TextBlock _textBlock;
 
-            public Tile( Decorator element )
+            public Tile( Border element )
             {
                 Element = element;
                 _textBlock = ( TextBlock ) element.Child;
             }
 
-            private Decorator Element
+            private Border Element
             {
                 get;
             }
