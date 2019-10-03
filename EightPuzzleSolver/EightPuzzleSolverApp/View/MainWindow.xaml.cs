@@ -13,6 +13,7 @@ namespace EightPuzzleSolverApp.View
     {
         private class Tile
         {
+            public Border Border => m_kBorder;
             private Border m_kBorder;
             private readonly TextBlock m_kTextBlock;
 
@@ -76,15 +77,13 @@ namespace EightPuzzleSolverApp.View
         private void VmOnCreateBoard( object kSender, CreateBoardEventArgs kEventArgs )
         {
             Board kBoard = kEventArgs.Board;
+            InitializeTiles( kBoard );
+            DecorateGridBoard( kBoard );
+            SetTileValues( kBoard );
+        }
 
-            m_kGridBoard.Children.Clear();
-
-            m_kGridBoard.Rows = kBoard.RowCount;
-            m_kGridBoard.Columns = kBoard.ColumnCount;
-
-            m_kGridBoard.Height = kBoard.RowCount * TILE_SIZE;
-            m_kGridBoard.Width = kBoard.ColumnCount * TILE_SIZE;
-
+        private void InitializeTiles( Board kBoard )
+        {
             m_kTiles = new Tile[ kBoard.RowCount, kBoard.ColumnCount ];
 
             for ( int i = 0; i < kBoard.RowCount; i++ )
@@ -106,12 +105,24 @@ namespace EightPuzzleSolverApp.View
                     };
 
                     m_kTiles[ i, j ] = new Tile( kBorder );
-
-                    m_kGridBoard.Children.Add( kBorder );
                 }
             }
+        }
 
-            SetTileValues( kBoard );
+        private void DecorateGridBoard( Board kBoard )
+        {
+            m_kGridBoard.Children.Clear();
+
+            m_kGridBoard.Rows = kBoard.RowCount;
+            m_kGridBoard.Columns = kBoard.ColumnCount;
+
+            m_kGridBoard.Height = kBoard.RowCount * TILE_SIZE;
+            m_kGridBoard.Width = kBoard.ColumnCount * TILE_SIZE;
+
+            foreach ( Tile kTile in m_kTiles )
+            {
+                m_kGridBoard.Children.Add( kTile.Border );
+            }
         }
 
         private void VmShowMoves( object sender, EventArgs eventArgs )
