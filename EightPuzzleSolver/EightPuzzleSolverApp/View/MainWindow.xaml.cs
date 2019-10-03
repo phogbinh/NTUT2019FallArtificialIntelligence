@@ -16,12 +16,15 @@ namespace EightPuzzleSolverApp.View
         private class Tile
         {
             public Border Border => m_kBorder;
+            public Position Position => m_kPosition;
             private Border m_kBorder;
+            private Position m_kPosition;
             private readonly TextBlock m_kTextBlock;
 
-            public Tile( Border kBorder )
+            public Tile( Border kBorder, Position kPosition )
             {
                 m_kBorder = kBorder;
+                m_kPosition = kPosition;
                 m_kTextBlock = ( TextBlock ) kBorder.Child;
             }
 
@@ -106,7 +109,7 @@ namespace EightPuzzleSolverApp.View
                         Child = kTextBlock
                     };
 
-                    m_kTiles[ i, j ] = new Tile( kBorder );
+                    m_kTiles[ i, j ] = new Tile( kBorder, new Position( i, j ) );
                 }
             }
         }
