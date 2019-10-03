@@ -5,6 +5,7 @@ namespace EightPuzzleSolver.EightPuzzle
 {
     public struct MoveDirection
     {
+        public static readonly MoveDirection None = new MoveDirection( "None", 0, 0 );
         public static readonly MoveDirection Left = new MoveDirection( "Left", 0, -1 );
         public static readonly MoveDirection Right = new MoveDirection( "Right", 0, +1 );
         public static readonly MoveDirection Top = new MoveDirection( "Top", -1, 0 );
