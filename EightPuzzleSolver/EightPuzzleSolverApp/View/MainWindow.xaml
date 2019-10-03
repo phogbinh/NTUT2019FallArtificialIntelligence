@@ -238,11 +238,6 @@
         </Grid>
 
         <Grid Grid.Row="1" Margin="5,6">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="70"/>
-            </Grid.ColumnDefinitions>
             <Viewbox Grid.Column="1" Margin="3,0" Stretch="Uniform">
                 <Border BorderBrush="#663333" BorderThickness="2">
                     <UniformGrid Width="200" Height="200" Name="grdBoard" Rows="3" Columns="3" Background="#9C754E">
