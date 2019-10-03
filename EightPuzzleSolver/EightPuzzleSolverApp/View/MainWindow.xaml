@@ -31,14 +31,14 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            
+
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-            
+
                 <Panel.Style>
                     <Style>
                         <Setter Property="Control.IsEnabled" Value="False"/>
@@ -49,14 +49,14 @@
                         </Style.Triggers>
                     </Style>
                 </Panel.Style>
-            
+
                 <StackPanel Grid.Row="0" Orientation="Horizontal">
                     <xctk:IntegerUpDown Margin="3" Padding="10,0" Minimum="2" Maximum="5"
                                         Value="{Binding ColumnCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Margin="3" Text="x" VerticalAlignment="Center"/>
                     <xctk:IntegerUpDown Margin="3" Padding="10,0" Minimum="2" Maximum="5"
                                         Value="{Binding RowCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                
+
                     <Button Margin="8,3" Padding="10,3" Content="Generate"
                             Command="{Binding GenerateBoardCommand}"/>
                 </StackPanel>
@@ -83,7 +83,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                
+
                 <Grid Grid.Row="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -227,7 +227,7 @@
                                 </Style.Triggers>
                             </Style>
                         </Panel.Style>
-                        
+
                         <TextBlock Text="{Binding CurrentMoveNumber}"/>
                         <TextBlock Text="/"/>
                         <TextBlock Text="{Binding SearchResult.MoveCount}"/>
@@ -256,6 +256,19 @@
         </Grid>
 
         <Grid Grid.Row="1" Margin="5,6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="3,5" Orientation="Vertical">
+                <Button Grid.Row="0" Margin="8,3" Padding="10,3" Width="100" HorizontalAlignment="Left" Content="Load Image"
+                            Command="{Binding LoadImageCommand}"/>
+                <Button Grid.Row="1" Margin="8,3" Padding="10,3" Width="100" HorizontalAlignment="Left" Content="Unload Image"
+                            Command="{Binding UnloadImageCommand}"/>
+                <Image Grid.Row="2" Margin="8,3" Height="300" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Resources/img_default.jpg"/>
+            </StackPanel>
+
             <Viewbox Grid.Column="1" Margin="3,0" Stretch="Uniform">
                 <Border BorderBrush="#663333" BorderThickness="2">
                     <UniformGrid Width="200" Height="200" Name="m_kGridBoard" Rows="3" Columns="3" Background="#9C754E">
