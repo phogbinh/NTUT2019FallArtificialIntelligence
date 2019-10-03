@@ -243,7 +243,6 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="70"/>
             </Grid.ColumnDefinitions>
-            
             <Viewbox Grid.Column="1" Margin="3,0" Stretch="Uniform">
                 <Border BorderBrush="#663333" BorderThickness="2">
                     <UniformGrid Width="200" Height="200" Name="grdBoard" Rows="3" Columns="3" Background="#9C754E">
@@ -262,48 +261,6 @@
                     </UniformGrid>
                 </Border>
             </Viewbox>
-
-            <Grid Grid.Column="2" Width="70">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                
-                <Grid.Style>
-                    <Style>
-                        <Setter Property="Control.Visibility" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding SearchResult}" Value="{x:Null}">
-                                <Setter Property="Control.Visibility" Value="Hidden"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding SearchResult.Success}" Value="False">
-                                <Setter Property="Control.Visibility" Value="Hidden"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Grid.Style>
-
-                <StackPanel Grid.Row="0" Margin="0,0,0,3" Orientation="Horizontal">
-                    <TextBlock FontWeight="Bold"
-                               Text="{Binding SearchResult.MoveCount}"/>
-                    <TextBlock Text=" moves"/>
-                </StackPanel>
-
-                <ListBox Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="lstMoves_OnSelectionChanged"
-                         ItemsSource="{Binding SearchResult.SolutionActions}" SelectedIndex="{Binding CurrentMoveIndex, Mode=OneWay}">
-                    <ListBox.ToolTip>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Movement directions of the "/>
-                            <TextBlock FontWeight="Bold" Text="blank tile"/>
-                        </StackPanel>
-                    </ListBox.ToolTip>
-                </ListBox>
-                
-                <Button Grid.Row="2" Margin="0,3,0,0" Padding="0,3" Content="Show"
-                        Command="{Binding ShowMovesCommand}"/>
-            </Grid>
-
         </Grid>
     </Grid>
 </Window>

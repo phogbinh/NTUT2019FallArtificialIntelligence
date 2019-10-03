@@ -81,7 +81,6 @@ namespace EightPuzzleSolverApp.ViewModel
                 SolveOrStopCommand.RaiseCanExecuteChanged();
                 GenerateBoardCommand.RaiseCanExecuteChanged();
                 FillBoardCommand.RaiseCanExecuteChanged();
-                ShowMovesCommand.RaiseCanExecuteChanged();
                 EnterManualPlayCommand.RaiseCanExecuteChanged();
             }
         }
@@ -300,18 +299,6 @@ namespace EightPuzzleSolverApp.ViewModel
                        ?? ( _fillBoardCommand = new RelayCommand(
                            FillBoard,
                            () => State == EWorkState.IDLE ) );
-            }
-        }
-
-        private RelayCommand _showMovesCommand;
-        public RelayCommand ShowMovesCommand
-        {
-            get
-            {
-                return _showMovesCommand
-                       ?? ( _showMovesCommand = new RelayCommand(
-                           StartShowingMoves,
-                           () => State == EWorkState.IDLE && SearchResult != null && SearchResult.Success ) );
             }
         }
 
