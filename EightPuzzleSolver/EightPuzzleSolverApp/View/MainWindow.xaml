@@ -69,7 +69,7 @@
                         <Button Grid.Row="0" Margin="8,3" Padding="10,3" Width="100" HorizontalAlignment="Left" Content="Load"
                             Command="{Binding FillBoardCommand}"/>
                         <Button Grid.Row="1" Margin="8,3" Padding="10,3" Width="100" HorizontalAlignment="Left" Content="Save"
-                            Command="{Binding FillBoardCommand}"/>
+                            Command="{Binding SaveBoardCommand}"/>
                         <Button Grid.Row="2" Margin="8,3" Padding="10,3" Width="100" HorizontalAlignment="Left" Content="Create/Reset"
                             Command="{Binding FillBoardCommand}"/>
                     </StackPanel>
