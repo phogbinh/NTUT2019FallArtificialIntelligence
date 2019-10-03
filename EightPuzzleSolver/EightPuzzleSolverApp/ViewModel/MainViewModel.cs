@@ -82,6 +82,7 @@ namespace EightPuzzleSolverApp.ViewModel
 
                 SolveOrStopCommand.RaiseCanExecuteChanged();
                 GenerateBoardCommand.RaiseCanExecuteChanged();
+                LoadBoardCommand.RaiseCanExecuteChanged();
                 SaveBoardCommand.RaiseCanExecuteChanged();
                 FillBoardCommand.RaiseCanExecuteChanged();
                 EnterOrExitManualPlayCommand.RaiseCanExecuteChanged();
@@ -293,6 +294,18 @@ namespace EightPuzzleSolverApp.ViewModel
             }
         }
 
+        private RelayCommand m_kLoadBoardCommand;
+        public RelayCommand LoadBoardCommand
+        {
+            get
+            {
+                return m_kLoadBoardCommand
+                       ?? ( m_kLoadBoardCommand = new RelayCommand(
+                           LoadBoard,
+                           () => State == EWorkState.IDLE ) );
+            }
+        }
+
         private RelayCommand m_kSaveBoardCommand;
         public RelayCommand SaveBoardCommand
         {
@@ -387,6 +400,10 @@ namespace EightPuzzleSolverApp.ViewModel
             CurrentBoard = board;
 
             OnCreateBoard( new CreateBoardEventArgs( board ) );
+        }
+
+        private void LoadBoard()
+        {
         }
 
         private void SaveBoard()
