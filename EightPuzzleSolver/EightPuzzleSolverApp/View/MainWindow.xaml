@@ -165,8 +165,18 @@
 
                     <TextBlock Margin="15 3 15 3" Text="or" VerticalAlignment="Center"/>
 
-                    <Button Margin="3,8" Padding="40,3" FontSize="14" Content="Enter Manual Play"
-                        Command="{Binding EnterManualPlayCommand}">
+                    <Button Margin="3,8" Padding="40,3" FontSize="14"
+                        Command="{Binding EnterOrExitManualPlayCommand}">
+                        <Button.Style>
+                            <Style>
+                                <Setter Property="Button.Content" Value="Enter Manual Play"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding State}" Value="{x:Static vm:EWorkState.MANUAL_PLAYING}">
+                                        <Setter Property="Button.Content" Value="Exit Manual Play"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
                 </StackPanel>
 

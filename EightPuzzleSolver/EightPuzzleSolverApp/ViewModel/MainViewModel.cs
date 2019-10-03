@@ -81,7 +81,7 @@ namespace EightPuzzleSolverApp.ViewModel
                 SolveOrStopCommand.RaiseCanExecuteChanged();
                 GenerateBoardCommand.RaiseCanExecuteChanged();
                 FillBoardCommand.RaiseCanExecuteChanged();
-                EnterManualPlayCommand.RaiseCanExecuteChanged();
+                EnterOrExitManualPlayCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -302,15 +302,25 @@ namespace EightPuzzleSolverApp.ViewModel
             }
         }
 
-        private RelayCommand m_kEnterManualPlayCommand;
-        public RelayCommand EnterManualPlayCommand
+        private RelayCommand m_kEnterOrExitManualPlayCommand;
+        public RelayCommand EnterOrExitManualPlayCommand
         {
             get
             {
-                return m_kEnterManualPlayCommand
-                       ?? ( m_kEnterManualPlayCommand = new RelayCommand(
-                           EnterManualPlay,
-                           () => State == EWorkState.IDLE ) );
+                return m_kEnterOrExitManualPlayCommand
+                       ?? ( m_kEnterOrExitManualPlayCommand = new RelayCommand(
+                           () =>
+                           {
+                               if ( State == EWorkState.IDLE )
+                               {
+                                   EnterManualPlay();
+                               }
+                               else
+                               {
+                                   ExitManualPlay();
+                               }
+                           },
+                           () => State == EWorkState.IDLE || State == EWorkState.MANUAL_PLAYING ) );
             }
         }
 
@@ -423,6 +433,11 @@ namespace EightPuzzleSolverApp.ViewModel
         {
             OnCreateBoard( new CreateBoardEventArgs( CurrentBoard ) );
             State = EWorkState.MANUAL_PLAYING;
+        }
+
+        private void ExitManualPlay()
+        {
+            State = EWorkState.IDLE;
         }
 
         private void Stop()
