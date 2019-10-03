@@ -11,6 +11,8 @@ namespace EightPuzzleSolverApp.View
 {
     public partial class MainWindow : Window
     {
+        private const int TILE_MOVE_DURATION_MSEC = 900;
+
         private class Tile
         {
             public Border Border => m_kBorder;
@@ -33,7 +35,7 @@ namespace EightPuzzleSolverApp.View
                 m_kBorder.Visibility = eVisibility;
             }
 
-            public void Move( MoveDirection kDirection, Action kCallbackFunc, int nDurationMs = 900 )
+            public void Move( MoveDirection kDirection, Action kCallbackFunc, int nDurationMs )
             {
                 var kDuration = new Duration( TimeSpan.FromMilliseconds( nDurationMs ) );
 
@@ -147,7 +149,7 @@ namespace EightPuzzleSolverApp.View
             {
                 SetTileValues( kState.Board );
                 ShowNextMove();
-            } );
+            }, TILE_MOVE_DURATION_MSEC );
         }
 
         private void SetTileValues( Board board )
