@@ -23,6 +23,8 @@ namespace EightPuzzleSolverApp.ViewModel
 
     public sealed class MainViewModel : ViewModelBase, IDisposable
     {
+        public IDialogService DialogService => _dialogService;
+
         private readonly IPuzzleSolverService _puzzleSolverService;
         private readonly IDialogService _dialogService;
 

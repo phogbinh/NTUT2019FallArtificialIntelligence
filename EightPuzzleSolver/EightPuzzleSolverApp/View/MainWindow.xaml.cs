@@ -127,6 +127,7 @@ namespace EightPuzzleSolverApp.View
         {
             if ( _viewModel.State != EWorkState.MANUAL_PLAYING )
             {
+                _viewModel.DialogService.ShowError( "Please enter Manual Play mode to move the tiles." );
                 return;
             }
 
