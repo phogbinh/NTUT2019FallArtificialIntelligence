@@ -123,40 +123,40 @@ namespace EightPuzzleSolverApp.ViewModel
             }
         }
 
-        private string _boardInputText = "8 6 7\r\n2 5 4\r\n3 0 1";
+        private string m_strBoardInputText = "8 6 7\r\n2 5 4\r\n3 0 1";
         public string BoardInputText
         {
             get
             {
-                return _boardInputText;
+                return m_strBoardInputText;
             }
             set
             {
-                if ( _boardInputText == value )
+                if ( m_strBoardInputText == value )
                 {
                     return;
                 }
 
-                _boardInputText = value;
+                m_strBoardInputText = value;
                 RaisePropertyChanged();
             }
         }
 
-        private Board _currentBoard;
+        private Board m_kCurrentBoard;
         public Board CurrentBoard
         {
             get
             {
-                return _currentBoard;
+                return m_kCurrentBoard;
             }
             set
             {
-                if ( _currentBoard == value )
+                if ( m_kCurrentBoard == value )
                 {
                     return;
                 }
 
-                _currentBoard = value;
+                m_kCurrentBoard = value;
                 RaisePropertyChanged();
             }
         }
