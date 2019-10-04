@@ -14,6 +14,7 @@ namespace EightPuzzleSolverApp.View
     public partial class MainWindow : Window
     {
         private const int TILE_MOVE_DURATION_MSEC = 300;
+        private const string ERROR_CANNOT_CROP_IMAGE = "Cannot crop the loaded image. This is a known error and is believed to be related with the image color profile. Application will now exit.\n\n";
 
         private class Tile
         {
@@ -218,7 +219,15 @@ namespace EightPuzzleSolverApp.View
                     int nLeft = j * nCroppedImageWidth;
                     int nTop = i * nCroppedImageHeight;
                     Int32Rect kRectangle = new Int32Rect( nLeft, nTop, nCroppedImageWidth, nCroppedImageHeight );
-                    kImages.Add( new CroppedBitmap( kBoardImage, kRectangle ) );
+                    try
+                    {
+                        kImages.Add( new CroppedBitmap( kBoardImage, kRectangle ) );
+                    }
+                    catch ( ArgumentException kException )
+                    {
+                        _viewModel.DialogService.ShowError( ERROR_CANNOT_CROP_IMAGE + kException.ToString() );
+                        Environment.Exit( 1 );
+                    }
                 }
             }
 
